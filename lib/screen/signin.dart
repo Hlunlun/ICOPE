@@ -46,12 +46,12 @@ class _Signin extends State<Signin> {
                 ),),
 
 
-                // background: Stack(
-                //   fit: StackFit.expand,
-                //   children: <Widget>[
-                //     Image.asset('assets/images/cloudsea.jpg',fit: BoxFit.fill,),
-                //   ],
-                // ),
+                background: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    Image.network('https://inspire.chu-toulouse.fr/wp-content/uploads/2020/04/inspire_hp_visuel_header.jpg',fit: BoxFit.fill,),
+                  ],
+                ),
               ),
             ),
             ///一條一條的 list
