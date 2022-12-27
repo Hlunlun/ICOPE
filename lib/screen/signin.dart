@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../record/record.dart';
+import 'package:sign_button/sign_button.dart';
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);
@@ -23,35 +23,32 @@ class _Signin extends State<Signin> {
       ///flexible "appbar",  可以直接用  CustomScrollView
       body:  CustomScrollView(
           physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+              parent: AlwaysScrollableScrollPhysics()
+          ),
           slivers:<Widget>[
             SliverAppBar(
               stretch: true,
               //onStretchTrigger: (){ },//拉動時觸發的事件
-              expandedHeight:150,
+              expandedHeight:200,
 
               ///不知的狀態????
               flexibleSpace: FlexibleSpaceBar(
-                stretchModes: const <StretchMode>[
-                  StretchMode.zoomBackground,
-                  StretchMode.blurBackground,
-                  StretchMode.fadeTitle,
-                ],
-                centerTitle: true,
-
-
-                title: const Text('ICOPE',style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 50,
-                ),),
-
-
-                background: Stack(
-                  fit: StackFit.expand,
-                  children: <Widget>[
-                    Image.network('https://inspire.chu-toulouse.fr/wp-content/uploads/2020/04/inspire_hp_visuel_header.jpg',fit: BoxFit.fill,),
+                 stretchModes: const <StretchMode>[
+                      StretchMode.zoomBackground,
+                      StretchMode.blurBackground,
+                      StretchMode.fadeTitle,
                   ],
-                ),
+                  centerTitle: true,
+                  title: const Text('ICOPE',style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 50,
+                  ),),
+                  background: Stack(
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      Image.network('https://inspire.chu-toulouse.fr/wp-content/uploads/2020/04/inspire_hp_visuel_header.jpg',fit: BoxFit.fill,),
+                    ],
+                  ),
               ),
             ),
             ///一條一條的 list
@@ -106,7 +103,7 @@ class _Signin extends State<Signin> {
                       ),
                     ),
 
-                    const SizedBox(height: 100,),
+                    const SizedBox(height: 60,),
 
                     Padding(
                         padding: const EdgeInsets.fromLTRB(60,0,60,0),
@@ -135,25 +132,25 @@ class _Signin extends State<Signin> {
                     ///最下面那排使用其他帳號登入
                     ///要記得  import 'package:sign_button/sign_button.dart'
                     ///才能用 SignInButton
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: <Widget>[
-                    //     SignInButton.mini(
-                    //         buttonType:ButtonType.google,
-                    //         onPressed: (){}
-                    //     ),
-                    //     SignInButton.mini(
-                    //         buttonType:ButtonType.facebook,
-                    //         btnColor: Colors.white,
-                    //         onPressed: (){}
-                    //     ),
-                    //     SignInButton.mini(
-                    //         buttonType:ButtonType.github,
-                    //         onPressed: (){}
-                    //     ),
-                    //
-                    //   ],
-                    // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SignInButton.mini(
+                            buttonType:ButtonType.google,
+                            onPressed: (){}
+                        ),
+                        SignInButton.mini(
+                            buttonType:ButtonType.facebook,
+                            btnColor: Colors.white,
+                            onPressed: (){}
+                        ),
+                        SignInButton.mini(
+                            buttonType:ButtonType.github,
+                            onPressed: (){}
+                        ),
+
+                      ],
+                    ),
 
 
 
