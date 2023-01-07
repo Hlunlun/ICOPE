@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
         colorScheme: ColorScheme.light().copyWith(primary: Colors.red),
+       useMaterial3: true
       ),
       initialRoute: '/signin',
       routes: {

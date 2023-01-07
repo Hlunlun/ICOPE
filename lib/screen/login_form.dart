@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:icope/user/user.dart';
+import 'package:icope/user/user_api.dart';
 import '../constants.dart';
 import '../utils/alert_dialog.dart';
 
@@ -13,7 +15,7 @@ class LoginForm extends StatelessWidget {
   Color loginBtnColor = Color(0xffe8ad4a);
 
 
-
+  // listen to input text
   final TextEditingController idController=TextEditingController();
   final TextEditingController pwdController=TextEditingController();
 
@@ -108,39 +110,39 @@ class LoginForm extends StatelessWidget {
 
           Hero(
             tag: "login_btn",
-            child: ElevatedButton(
+            child : TextButton(
               style: ButtonStyle(
                 fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
                 backgroundColor: MaterialStateProperty.all(loginBtnColor),
               ),
-              onPressed: (){
-                  Navigator.pushNamed(context, '/main');
+              onPressed: () async{
+                if(idController.text == "" || pwdController.text == ""){
+                  String message = '請確認是否填寫正確手機號碼與密碼';
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) =>ShowAlertDialog(message:message),
+                  );
+                }else{
+                  bool exist = await UserApi.checkUser(idController.text,pwdController.text );
+                  if(exist){
+                    Navigator.pushNamed(context, '/main');
+                  }else{
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) =>ShowAlertDialog(message:'此用戶不存在'),
+                      );
+                  }
+
+
+                }
               },
-              child: const Text('登入',style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  color: Colors.white,
-                  fontSize: 25
-              ),),
+                child: const Text('登入',style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
+                    fontSize: 25
+                ),),
             ),
-            // child: Padding(
-            //     padding: const EdgeInsets.fromLTRB(0,0,0,0),
-            //     child: ElevatedButton(
-            //       style: ButtonStyle(
-            //         fixedSize: MaterialStateProperty.all(const Size(0,30.0)),
-            //         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(30))),
-            //         backgroundColor: MaterialStateProperty.all(loginBtnColor),
-            //       ),
-            //       onPressed: (){
-            //         ///page through
-            //         Navigator.pushNamed(context, '/main');
-            //       },
-            //       child: const Text('登入',style: TextStyle(
-            //           fontWeight: FontWeight.w300,
-            //           color: Colors.white,
-            //           fontSize: 25
-            //       ),),
-            //     )),
           ),
           const SizedBox(height: defaultPadding),
           // AlreadyHaveAnAccountCheck(

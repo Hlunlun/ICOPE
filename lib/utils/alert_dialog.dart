@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
 
-class ShowAlertDialog extends StatelessWidget {
 
+class ShowAlertDialog extends StatelessWidget {
   const ShowAlertDialog({
-    Key? key,
     required this.message,
+    Key? key,
   }) : super(key: key);
 
   final String message;
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(message),
-      actions: [
-        ElevatedButton(
-            child: Text("OK"),
-            onPressed: () {
-              Navigator.pop(context);
-            }
+      title: const Text('請完整填寫資料'),
+      content: Text(message),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'ok'),
+          child: const Text('好的'),
         ),
       ],
     );
-
   }
-
 }
