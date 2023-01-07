@@ -31,20 +31,27 @@ def add_user_heath_info(info):
     data={
         'name' : info['name'],
         'id' : info['id'],
-        'height' : info['height'],
-        'weight' : info['weight'],
-        'blood pressure' : info['blood_pressure']
+        'health_record' : [],
     }
 
     collection.insert_one(data)
 
-def find_user(info):
+def find_user_login(info):
     db = get_database()
     collection = db['users']
 
     user = collection.find_one( {
         'id': {'$eq' : info['id']},
         'password' : {'$eq' : info['pwd']}        
+    })
+
+    return user
+
+def find_user_by_id(user_id):
+    db = get_database()
+    collection = db['users']
+    user = collection.find_one({
+        'id' : {'$eq' : user_id}
     })
 
     return user
@@ -56,6 +63,7 @@ if __name__ == "__main__":
     'name' : 'jj',
     'pwd':'jj',
     'id' : '0',
+    'health_record' : []
 
    })
    print(db)

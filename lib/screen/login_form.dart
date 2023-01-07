@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icope/main.dart';
 import 'package:icope/user/user.dart';
 import 'package:icope/user/user_api.dart';
 import '../constants.dart';
@@ -126,6 +127,9 @@ class LoginForm extends StatelessWidget {
                 }else{
                   bool exist = await UserApi.checkUser(idController.text,pwdController.text );
                   if(exist){
+                    MyApp.userid = idController.text;
+                    idController.text = "";
+                    pwdController.text = "";
                     Navigator.pushNamed(context, '/main');
                   }else{
                       showDialog<String>(

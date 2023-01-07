@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
-
+import 'screen/home_page.dart';
 import 'screen/ability.dart';
 import 'screen/vision.dart';
 import 'screen/dailyrecord.dart';
@@ -16,6 +15,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static String username = "";
+  static String userid = "";
+
   const MyApp({super.key});
 
   // This widget is the root of your application.
