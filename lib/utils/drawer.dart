@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:icope/main.dart';
 
+import 'dart:async';
+
+import 'package:icope/user/user_api.dart';
+
 class UserDrawer extends StatelessWidget {
   const UserDrawer({
     Key? key,
   }) : super(key: key);
 
-  
+
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+    getName();
     return Drawer(
         width: 250,
         child: Container(
@@ -54,6 +59,11 @@ class UserDrawer extends StatelessWidget {
           ),
         ),
     );
+  }
+
+
+  void getName()async{
+    MyApp.username = await UserApi.findUserName(MyApp.userid);
   }
 }
 

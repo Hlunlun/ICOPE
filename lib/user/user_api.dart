@@ -32,9 +32,9 @@ class UserApi {
         }
     }
 
-    static Future<bool> findUserName( String id) async{
+    static Future<String> findUserName( String id) async{
         var client =http.Client();
-        var uri=Uri.parse("http://" + api + "/find_user");
+        var uri=Uri.parse("http://" + api + "/find_user_name");
         final http.Response response = await client.post(
             uri,
             headers: <String, String>{
@@ -46,10 +46,11 @@ class UserApi {
         );
         if(response.statusCode==200){
             final json = jsonDecode(response.body);
-            if(json['exist']){
-                return true;
+            if(json['success']){
+                return json['name'];
+            }else{
+                return "None";
             }
-            return false;
         }else {
             throw Exception('Failed to Save User.');
         }

@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 @app.route('/check_user', methods = ['POST'])
-def get_data():
+def check_user():
     if request.method == 'POST':
         user_id=request.json['id']
         pwd = request.json['pwd']
@@ -22,12 +22,12 @@ def get_data():
 
 
 @app.route('/find_user_name', methods = ['POST'])
-def get_data():
+def find_user_name():
     if request.method == 'POST':
         user_id=request.json['id']
         
         user = find_user_by_id(user_id)
-        return  jsonify({'name' : user['name']})
+        return  jsonify({'success' : user!=None ,'name' : user['name']})
 
 
 if __name__ == "__main__":       
