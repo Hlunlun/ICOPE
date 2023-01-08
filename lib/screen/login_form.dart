@@ -120,25 +120,27 @@ class LoginForm extends StatelessWidget {
               onPressed: () async{
                 if(idController.text == "" || pwdController.text == ""){
                   String message = '請確認是否填寫正確手機號碼與密碼';
+                  String title = '請填寫完整資料';
                   showDialog<String>(
                     context: context,
-                    builder: (BuildContext context) =>ShowAlertDialog(message:message),
+                    builder: (BuildContext context) =>ShowAlertDialog(title: title, message:message),
                   );
                 }else{
                   bool exist = await UserApi.checkUser(idController.text,pwdController.text );
                   if(exist){
                     MyApp.userid = idController.text;
+
+                    MyApp.username = await UserApi.findUserName(MyApp.userid);
                     idController.text = "";
                     pwdController.text = "";
+
                     Navigator.pushNamed(context, '/main');
                   }else{
                       showDialog<String>(
                         context: context,
-                        builder: (BuildContext context) =>ShowAlertDialog(message:'此用戶不存在'),
+                        builder: (BuildContext context) =>ShowAlertDialog(title: '登入資料錯誤',message:'此用戶不存在'),
                       );
                   }
-
-
                 }
               },
                 child: const Text('登入',style: TextStyle(
@@ -149,18 +151,18 @@ class LoginForm extends StatelessWidget {
             ),
           ),
           const SizedBox(height: defaultPadding),
-          // AlreadyHaveAnAccountCheck(
-          //   press: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) {
-          //           return SignUpScreen();
-          //         },
-          //       ),
-          //     );
-          //   },
-          // ),
+
+          TextButton(
+            onPressed: () async{
+
+              Navigator.pushNamed(context, '/signup');
+            },
+            child: const Text('註冊新帳號',style: TextStyle(
+                fontWeight: FontWeight.w300,
+                color: Colors.orange,
+                fontSize: 25
+            ),),
+          ),
         ],
       ),
     );

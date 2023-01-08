@@ -11,7 +11,7 @@ def get_database():
     return db
     return client.icope
 
-def add_user_info(info):
+def add_new_user(info):
     db = get_database()
 
     collection = db['users']
@@ -19,21 +19,9 @@ def add_user_info(info):
     data = {        
         'name':info['name'],
         'password' : info['pwd'],
-        'id' : info['id']
-    }
-    collection.insert_one(data)
-
-def add_user_heath_info(info):
-    db = get_database()
-
-    collection = db['health']
-
-    data={
-        'name' : info['name'],
         'id' : info['id'],
         'health_record' : [],
     }
-
     collection.insert_one(data)
 
 def find_user_login(info):
@@ -55,7 +43,8 @@ def find_user_by_id(user_id):
     })
 
     return user
-    
+
+
 
 if __name__ == "__main__": 
    db = get_database()

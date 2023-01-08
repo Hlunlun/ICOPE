@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icope/main.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
 
 import 'package:icope/user/user_api.dart';
@@ -14,7 +14,7 @@ class UserDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
-    getName();
+
     return Drawer(
         width: 250,
         child: Container(
@@ -29,11 +29,9 @@ class UserDrawer extends StatelessWidget {
                 decoration: BoxDecoration (
                     color: Color(0xff92C7C7)
                 ),
-                child: ListTile (
-                    title: Text(MyApp.username, style: stringStyle,),
-                    onTap: () {
-                    },
-                ),
+                child: Center(
+                  child:Text(MyApp.username, style: TextStyle(fontSize: 50),),
+                )
               ),
               ListTile (
                 leading: Icon(Icons.folder,size: 35),
@@ -50,7 +48,13 @@ class UserDrawer extends StatelessWidget {
               ListTile (
                 leading: Icon(Icons.phone_callback,size: 35,),
                 title: Text('客服電話', style: stringStyle,),
-                onTap: () {
+                onTap: () async{
+                    const url = 'tel:06 235 3535';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
                 },
               ),
 
@@ -59,11 +63,6 @@ class UserDrawer extends StatelessWidget {
           ),
         ),
     );
-  }
-
-
-  void getName()async{
-    MyApp.username = await UserApi.findUserName(MyApp.userid);
   }
 }
 

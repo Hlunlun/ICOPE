@@ -29,8 +29,9 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
 
         title: const Text('ICOPE',style: TextStyle(
-          color: Colors.white,
-          fontSize: 30,
+          color: Colors.grey,
+          fontSize: 40,
+          fontWeight:FontWeight.w900,
         ),),
         backgroundColor: Colors.white12,
         actions: [
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
             },
             child:Row(
               children: [
-                Text('每日記錄'),
+                Text('每日記錄',style: TextStyle(color: Colors.white),),
                 IconButton(
                   iconSize: 35,
                   color: Colors.white,
@@ -59,8 +60,6 @@ class _HomePageState extends State<HomePage> {
 
             ),
           )
-
-
         ],
       ),
       body: Column(

@@ -29,6 +29,18 @@ def find_user_name():
         user = find_user_by_id(user_id)
         return  jsonify({'success' : user!=None ,'name' : user['name']})
 
+# @app.route('add_new_user',methods = ['POST'])
+# def add_new_user():
+#     if request.method == 'POST':
+#         user_id = request.json['id']
+
+#         user_name = request.json['name']
+
+#         user_disease = request.json['disease']
+
+#         return jsonify({'success' : True})
+
+
 
 if __name__ == "__main__":       
     app.debug = False

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icope/screen/signup.dart';
 
 import 'screen/home_page.dart';
 import 'screen/ability.dart';
@@ -26,13 +27,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        colorScheme: ColorScheme.light().copyWith(primary: Colors.red),
+        primarySwatch: Colors.orange,
+        colorScheme: ColorScheme.light().copyWith(primary: Colors.orange),
        useMaterial3: true
       ),
       initialRoute: '/signin',
       routes: {
         '/signin': (context)=>const Signin(),
+        '/signup' : (context) =>const Signup(),
         '/main': (context)=>const HomePage(),
         '/cognitive' :(context)=>const Cognitive(),
         '/dailyrecord' : (context)=>const DailyRecord(),

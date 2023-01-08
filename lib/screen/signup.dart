@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:icope/utils/drawer.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -18,6 +19,33 @@ class _Signup extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+      return  Scaffold(
+          drawer: UserDrawer(),
+          appBar: AppBar(
+
+            title: const Text('註冊帳號',style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+            ),),
+            backgroundColor:  Color(0xffe8ad4a),
+            
+
+            // actions: [
+            //   IconButton(
+            //     iconSize: 35,
+            //     color: Colors.white,
+            //     onPressed: () {
+            //       Navigator.pushNamed(context, '/favorite');
+            //     },
+            //     icon: const Icon(Icons.settings),
+            //   ),
+            // ],
+          ),
+          body:Column(
+            children: [
+
+            ],
+          )
+      );
   }
 }

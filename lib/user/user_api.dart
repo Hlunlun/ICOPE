@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:icope/environment.dart';
 
 import 'package:icope/user/user.dart';
 
-String api = '10.6.250.91:30011';
+String api = Environment.api;
 
 class UserApi {
 
@@ -55,6 +56,8 @@ class UserApi {
             throw Exception('Failed to Save User.');
         }
     }
+
+
 }
 
 
