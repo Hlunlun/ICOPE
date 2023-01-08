@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:icope/main.dart';
 import 'package:icope/user/user.dart';
 import 'package:icope/user/user_api.dart';
-import '../constants.dart';
+import '../utils/constants.dart';
 import '../utils/alert_dialog.dart';
 
 class LoginForm extends StatelessWidget {

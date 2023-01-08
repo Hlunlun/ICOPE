@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:icope/environment.dart';
+import 'package:icope/utils/environment.dart';
 
 class Speech2Text {
   //若透過Android手機傳送，則設為"A"；若透過網頁傳送，則設為"W"

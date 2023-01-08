@@ -4,7 +4,7 @@ import 'package:icope/utils/drawer.dart';
 import 'package:icope/utils/alert_dialog.dart';
 
 import '../record/record.dart';
-import '../timer_model.dart';
+import '../utils/timer_model.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 
