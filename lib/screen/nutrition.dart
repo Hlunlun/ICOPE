@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../record/flutter_tts.dart';
 import '../record/nutri_player.dart';
-import 'package:icope/utils/drawer.dart';
-
 
 //TODO : disabled -> once 3 months
 final TextEditingController nutriController=TextEditingController();
@@ -33,7 +31,7 @@ class _Nutrition extends State<Nutrition> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: UserDrawer(),
+        drawer: buildDrawer('userEmail', context),
         appBar: AppBar(
 
           title: const Text('營養評估',style: TextStyle(
@@ -52,17 +50,21 @@ class _Nutrition extends State<Nutrition> {
           //   ),
           // ],
         ),
-        body:Column(
-          children: [
+        body:ListView(
+
+        //Important :Remove any padding from the ListView
+          padding: EdgeInsets.zero,
+          children: <Widget>[
             SizedBox(height: 50,),
-            nutriRecord(),
+            nutriRecord(title: '第一個問題, 三個月中體重是否無意減少, 第二個問題, 是否食慾不振?'),
             Padding(
                 padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
               child: Text('三個月中體重是否無意減少?',style: TextStyle(fontSize: 40),)
             ),
-            Hero(
-              tag: "login_btn",
 
+            const SizedBox(height: 30),
+            Padding(
+              padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
               child: ElevatedButton(
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
@@ -70,15 +72,15 @@ class _Nutrition extends State<Nutrition> {
                   backgroundColor: MaterialStateProperty.all(loginBtnColor),
                 ),
                 onPressed: (){
-                    showDialog<String>(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          content:
-                          Text('異常, 請前往鄰近醫院進行進一步檢查!!!'),
-                        );
-                      },
-                    );
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content:
+                        Text('異常, 請前往鄰近醫院進行進一步檢查!!!'),
+                      );
+                    },
+                  );
                 },
                 child: const Text('是',style: TextStyle(
                     fontWeight: FontWeight.w100,
@@ -88,9 +90,9 @@ class _Nutrition extends State<Nutrition> {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
-            Hero(
-              tag: "login_btn",
+            SizedBox(height: 30,),
+            Padding(
+              padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
               child: ElevatedButton(
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
@@ -119,12 +121,12 @@ class _Nutrition extends State<Nutrition> {
 
             SizedBox(height: 50,),
             Padding(
-                padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
+                padding: EdgeInsets.fromLTRB(120, 0, 20, 0),
                 child: Text('是否食慾不振?',style: TextStyle(fontSize: 40),)
             ),
-            Hero(
-              tag: "login_btn",
-
+            SizedBox(height: 50,),
+            Padding(
+              padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
               child: ElevatedButton(
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
@@ -151,8 +153,8 @@ class _Nutrition extends State<Nutrition> {
               ),
             ),
             const SizedBox(height: 30),
-            Hero(
-              tag: "login_btn",
+            Padding(
+              padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
               child: ElevatedButton(
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
@@ -186,5 +188,76 @@ class _Nutrition extends State<Nutrition> {
 
   }
 
+  Widget buildDrawer(String userEmail, BuildContext context) {
+    return Drawer(
 
+      //Add  a ListView to the drawer.This ensures the user can scroll
+      //through the options in the drawer if there isn't enough vertical
+      //space to fit everything
+      child: Container(
+        color: const Color(0xFFC4C4C4),
+        child: ListView(
+
+          //Important :Remove any padding from the ListView
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: const Text('username', style: stringStyle,),
+              accountEmail: Text(userEmail, style: stringStyle,),
+              decoration: const BoxDecoration(
+                  color: Colors.pinkAccent
+              ),
+
+              currentAccountPicture: Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                width: 100.0,
+                height: 30.0,
+                decoration: const BoxDecoration(
+                  //shape: BoxShape.circle,
+                  // image: DecorationImage(
+                  //   fit: BoxFit.fitWidth,
+                  //   image: AssetImage('assets/images/lun.jpg'),
+                  //
+                  // ),
+                ),
+              ),
+            ),
+
+            ListTile(
+              title: const Text('Health Record', style: stringStyle,),
+              leading: const Icon(Icons.folder),
+              onTap: () {
+                //Update the state of the app
+                //..
+                //Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+
+              title: const Text('Logout', style: stringStyle,),
+              leading: const Icon(Icons.upload_rounded),
+              onTap: () {
+                //Update the state of the app
+                //..
+                //Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Setting', style: stringStyle,),
+              leading: const Icon(Icons.settings),
+              onTap: () {
+                //Update the state of the app
+                //...
+                //Then close the drawer
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ),
+      ),
+
+    );
+  }
 }
