@@ -47,6 +47,7 @@ dependencies:
   sign_button: ^2.0.2
   flutter_sms: ^2.3.3
   telephony: ^0.2.0
+  flutter_holo_date_picker: ^1.1.0
 
 
 dev_dependencies:

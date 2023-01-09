@@ -8,19 +8,20 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'socket_stt.dart';
 
 
-final String title = '';
+
 class nutriRecord extends StatefulWidget {
   //const nutriRecord({Key? key}) : super(key: key);
   nutriRecord({
     Key? key,
-    required title,
   }) : super(key: key);
 
   @override
   State<nutriRecord> createState() => nutriRecordState();
 }
 
-class nutriRecordState extends State<nutriRecord> {
+class nutriRecordState extends State<nutriRecord>{
+  static String title='';
+
   // get SoundRecorder
   final recorder = SoundRecorder();
   // get soundPlayer
@@ -78,12 +79,10 @@ class nutriRecordState extends State<nutriRecord> {
       ),
       // 當 icon 被點擊時執行的動作
       onPressed: () async {
-        // 得到 TextField 中輸入的 value
-        // 如果為空則 return
-        String strings = title;
-        if (strings.isEmpty) return;
+
+        if (title.isEmpty) return;
         // connect to text2speech socket
-        await Text2Speech().connect(play, strings, recognitionLanguage.toLowerCase());
+        await Text2Speech().connect(play, title, recognitionLanguage.toLowerCase());
 
       },
     );

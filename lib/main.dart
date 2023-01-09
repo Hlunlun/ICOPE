@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icope/screen/age.dart';
 import 'package:icope/screen/gender.dart';
 import 'package:icope/screen/health_record.dart';
 import 'package:icope/screen/signup.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         '/listening' : (context) => const Listening(),
         '/health_record' : (content) => const HealthRecord(),
         '/gender' : (context) => const Gender(),
+        '/age' : (context) => const Age(),
       },
     );
   }

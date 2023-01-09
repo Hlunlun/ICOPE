@@ -14,7 +14,7 @@ class GenderCard extends StatelessWidget {
 
     return  InkWell(
       onTap: (){
-        // Navigator.pushNamed(context, '/age');
+        Navigator.pushNamed(context, '/age');
       },
       child: Card(
           color: loginBtnColor,
@@ -31,6 +31,4 @@ class GenderCard extends StatelessWidget {
       ),
     );
   }
-
-
 }

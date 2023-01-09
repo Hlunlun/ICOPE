@@ -1,51 +1,64 @@
-import 'package:icope/gender/gender_model.dart';
-import 'package:icope/gender/gender_card.dart';
-import '../utils/constants.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:flutter/material.dart';
 
 
+class Age extends StatefulWidget {
 
-final TextEditingController timesController=TextEditingController();
-class Gender extends StatefulWidget {
-  const Gender({Key? key}) : super(key: key);
-
+  const Age({Key? key}) : super(key: key);
   @override
-  State<Gender> createState() => _Gender();
+  _AgeState createState() => _AgeState();
 }
 
-
-class _Gender extends State<Gender> {
+class _AgeState extends State<Age> {
+  DateTime? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: fillColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(
-            height: 50,
-          ),
-          Center(
-            child:            Text('請點選你的性別', style: TextStyle(
-                fontSize: 30, color: loginBtnColor,fontWeight: FontWeight.w900
-            ),),
-          ),
-          Flexible(
-            child:ListView.builder(
-              itemCount: GenderModel.genders.length,
-              itemBuilder: (context, index) {
-                return GenderCard(
-                  icon: GenderModel.genders[index],
-                );
-              },
+    return SafeArea(
+      child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: FractionalOffset.topCenter,
+                end: FractionalOffset.bottomCenter,
+                colors: [
+                  Colors.grey[900]!,
+                  Colors.black,
+                ],
+                stops: const [0.7, 1.0],
+              )),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: DatePickerWidget(
+                    looping: false, // default is not looping
+                    firstDate: DateTime.now(), //DateTime(1960),
+                    //  lastDate: DateTime(2002, 1, 1),
+//              initialDate: DateTime.now(),// DateTime(1994),
+                    dateFormat:
+                    "yyyy/MMMM/dd",
+                    locale: DatePicker.localeFromString('ZH'),
+                    onChange: (DateTime newDate, _) {
+                      setState(() {
+                        _selectedDate = newDate;
+                      });
+                      print(_selectedDate);
+                    },
+                    pickerTheme: DateTimePickerTheme(
+                      backgroundColor: Colors.transparent,
+                      itemTextStyle:
+                      TextStyle(color: Colors.white, fontSize: 19),
+                      dividerColor: Colors.white,
+                    ),
+                  ),
+                ),
+                Text("${_selectedDate ?? ''}"),
+              ],
             ),
-          )
-        ],
-
-      ),
+          ),
+        ),
     );
   }
-
-
 }
