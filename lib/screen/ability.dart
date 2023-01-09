@@ -1,10 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:icope/utils/drawer.dart';
 import 'package:icope/utils/alert_dialog.dart';
+
 import '../record/record.dart';
-import '../timer_model.dart';
+import '../utils/timer_model.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
+
+
 Color cursorColor = Color(0xFFD78F50);
 Color fillColor = Color(0xFFF6D9C2);
 Color loginBtnColor = Color(0xffe8ad4a);
@@ -29,12 +33,9 @@ class _Ability extends State<Ability> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
-        drawer: buildDrawer('userEmail', context),
+        drawer: UserDrawer(),
         appBar: AppBar(
-
           title: const Text('行動能力評估',style: TextStyle(
             color: Colors.black87,
             fontSize: 30,
@@ -51,7 +52,7 @@ class _Ability extends State<Ability> {
           //   ),
           // ],
         ),
-        body:Column(
+        body: Column(
 
           children: [
 
@@ -149,76 +150,5 @@ class _Ability extends State<Ability> {
     );
   }
 
-  Widget buildDrawer(String userEmail, BuildContext context) {
-    return Drawer(
 
-      //Add  a ListView to the drawer.This ensures the user can scroll
-      //through the options in the drawer if there isn't enough vertical
-      //space to fit everything
-      child: Container(
-        color: const Color(0xFFC4C4C4),
-        child: ListView(
-
-          //Important :Remove any padding from the ListView
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: const Text('username', style: stringStyle,),
-              accountEmail: Text(userEmail, style: stringStyle,),
-              decoration: const BoxDecoration(
-                  color: Colors.pinkAccent
-              ),
-
-              currentAccountPicture: Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                width: 100.0,
-                height: 30.0,
-                decoration: const BoxDecoration(
-                  //shape: BoxShape.circle,
-                  // image: DecorationImage(
-                  //   fit: BoxFit.fitWidth,
-                  //   image: AssetImage('assets/images/lun.jpg'),
-                  //
-                  // ),
-                ),
-              ),
-            ),
-
-            ListTile(
-              title: const Text('Health Record', style: stringStyle,),
-              leading: const Icon(Icons.folder),
-              onTap: () {
-                //Update the state of the app
-                //..
-                //Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-
-              title: const Text('Logout', style: stringStyle,),
-              leading: const Icon(Icons.upload_rounded),
-              onTap: () {
-                //Update the state of the app
-                //..
-                //Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Setting', style: stringStyle,),
-              leading: const Icon(Icons.settings),
-              onTap: () {
-                //Update the state of the app
-                //...
-                //Then close the drawer
-                Navigator.pop(context);
-              },
-            )
-          ],
-        ),
-      ),
-
-    );
-  }
 }

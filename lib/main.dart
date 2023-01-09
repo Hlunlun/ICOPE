@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:icope/screen/signup.dart';
 
-import 'home_page.dart';
-
+import 'screen/home_page.dart';
 import 'screen/ability.dart';
 import 'screen/vision.dart';
 import 'screen/dailyrecord.dart';
@@ -16,6 +16,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static String username = "";
+  static String userid = "";
+
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -24,19 +27,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        colorScheme: ColorScheme.light().copyWith(primary: Colors.red),
+        primarySwatch: Colors.orange,
+        colorScheme: ColorScheme.light().copyWith(primary: Colors.orange),
+       useMaterial3: true
       ),
       initialRoute: '/signin',
       routes: {
         '/signin': (context)=>const Signin(),
+        '/signup' : (context) =>const Signup(),
         '/main': (context)=>const HomePage(),
         '/cognitive' :(context)=>const Cognitive(),
         '/dailyrecord' : (context)=>const DailyRecord(),
         '/mood' : (context) => const Mood(),
         '/nutrition' : (context) => const Nutrition(),
         '/vision' : (context) => const Vision(),
-        '/action' : (context) => const Ability(),
+        '/ability' : (context) => const Ability(),
         '/listening' : (context) => const Listening(),
       },
     );

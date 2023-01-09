@@ -29,8 +29,8 @@ class ItemCard extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Expanded(child:Icon(icon, size:50.0, )),
-                    Text(title, style: TextStyle(fontSize: 40),),
+                    Expanded(child:Icon(icon, size:100.0, color: Colors.white, )),
+                    Text(title, style: TextStyle(fontSize: 40,color: Colors.white),),
                   ]
               )
           )
