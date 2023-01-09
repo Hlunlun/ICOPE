@@ -51,7 +51,7 @@ class listenRecordState extends State<listenRecord> {
           const SizedBox(width: 10,),
           buildRecord(),
           const SizedBox(width: 10,),
-          buildOutputField(),
+          //buildOutputField(),
         ],
       ),
     ],
@@ -62,7 +62,6 @@ class listenRecordState extends State<listenRecord> {
   // build the button of recorder
   Widget buildRecord() {
     // whether is recording
-
     final isRecording = recorder.isRecording;
     // if recording => icon is Icons.stop
     // else => icon is Icons.mic
@@ -76,7 +75,6 @@ class listenRecordState extends State<listenRecord> {
     // if recording => text in button is white
     // else => color of button is black
     final onPrimary = isRecording ? Colors.white : Colors.black;
-
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
         // 設定 Icon 大小及屬性
@@ -99,8 +97,7 @@ class listenRecordState extends State<listenRecord> {
         // 控制開始錄音或停止錄音
         await recorder.toggleRecording(path);
         // When stop recording, pass wave file to socket
-        if (!recorder.isRecording)
-            await Speech2Text().connect(path, setTxt, "MTK_ch");
+        if (!recorder.isRecording) await Speech2Text().connect(path, setTxt, "MTK_ch");
         // set state is recording or stop
         setState(() {
           recorder.isRecording;
