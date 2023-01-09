@@ -1,115 +1,70 @@
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+import 'package:icope/utils/constants.dart';
 
-final today = DateUtils.dateOnly(DateTime.now());
 
 class Age extends StatefulWidget {
-  const Age({Key? key, }) : super(key: key);
+
+  const Age({Key?key}):super(key: key);
+
 
   @override
-  State<Age> createState() => _AgeState();
+  _AgeState createState() => _AgeState();
 }
 
 class _AgeState extends State<Age> {
-    List<DateTime?> _singleDatePickerValueWithDefaultValue = [
-      DateTime.now(),
-    ];
 
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        body: Center(
-          child: SizedBox(
-            width: 375,
-            child: ListView(
-              children: <Widget>[
-                _buildDefaultSingleDatePickerWithValue(),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
+  @override
+  Widget build(BuildContext context) {
 
-    String _getValueText(CalendarDatePicker2Type datePickerType,List<DateTime?> values,) {
-      var valueText = (values.isNotEmpty ? values[0] : null)
-          .toString()
-          .replaceAll('00:00:00.000', '');
+    return Scaffold(
+        body:Column(
+          children: [
+            const SizedBox(height: 100,),
+            const Text('請選擇生日日期', style: TextStyle(color: loginBtnColor,fontSize: 40,fontWeight: FontWeight.w900),),
+            const SizedBox(height: 100,),
+            Container(
+              child: DatePickerWidget(
+                locale: DateTimePickerLocale.jp,
+                lastDate: DateTime.now(),
+                onChange: (DateTime newDate, _) {
+                  setState(() {
+                    var dob = newDate.toString();
+                    print(dob);
+                  });
+                },
 
-      if (datePickerType == CalendarDatePicker2Type.multi) {
-        valueText = values.isNotEmpty
-            ? values
-            .map((v) => v.toString().replaceAll('00:00:00.000', ''))
-            .join(', ')
-            : 'null';
-      } else if (datePickerType == CalendarDatePicker2Type.range) {
-        if (values.isNotEmpty) {
-          final startDate = values[0].toString().replaceAll('00:00:00.000', '');
-          final endDate = values.length > 1
-              ? values[1].toString().replaceAll('00:00:00.000', '')
-              : 'null';
-          valueText = '$startDate to $endDate';
-        } else {
-          return 'null';
-        }
-      }
-
-      return valueText;
-    }
-
-    Widget _buildDefaultSingleDatePickerWithValue() {
-      final config = CalendarDatePicker2Config(
-        selectedDayHighlightColor: Colors.amber[900],
-        weekdayLabels: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-        weekdayLabelTextStyle: const TextStyle(
-          color: Colors.black87,
-          fontWeight: FontWeight.bold,
-        ),
-        firstDayOfWeek: 1,
-        controlsHeight: 50,
-        controlsTextStyle: const TextStyle(
-          color: Colors.black,
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-        dayTextStyle: const TextStyle(
-          color: Colors.amber,
-          fontWeight: FontWeight.bold,
-        ),
-        disabledDayTextStyle: const TextStyle(
-          color: Colors.grey,
-        ),
-        selectableDayPredicate: (day) => !day
-            .difference(DateTime.now().subtract(const Duration(days: 3)))
-            .isNegative,
-      );
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: 10),
-          const Text('Single Date Picker (With default value)'),
-          CalendarDatePicker2(
-            config: config,
-            initialValue: _singleDatePickerValueWithDefaultValue,
-            onValueChanged: (values) =>
-                setState(() => _singleDatePickerValueWithDefaultValue = values),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Selection(s):  '),
-              const SizedBox(width: 10),
-              Text(
-                _getValueText(
-                  config.calendarType,
-                  _singleDatePickerValueWithDefaultValue,
+                pickerTheme: const DateTimePickerTheme(
+                  backgroundColor: Color(0x869c796e),
+                  dividerColor: Colors.transparent,
+                  pickerHeight: 200,
+                  itemHeight: 110,
+                  itemTextStyle: TextStyle(
+                    fontSize: 60,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 25),
-        ],
+            ),
+            const SizedBox(height: 80,),
+            ElevatedButton(
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                  backgroundColor: MaterialStateProperty.all(loginBtnColor),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/health_record');
+                },
+                child: const Text('確認',style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
+                    fontSize: 25
+                ),),
+            )
+          ],
+        )
       );
     }
 }

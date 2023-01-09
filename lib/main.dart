@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 import 'package:icope/screen/age.dart';
+import 'package:icope/screen/ask_question.dart';
 import 'package:icope/screen/gender.dart';
 import 'package:icope/screen/health_record.dart';
 import 'package:icope/screen/signup.dart';
@@ -26,6 +27,10 @@ class MyApp extends StatelessWidget {
   static String username = "";
   static String userid = "";
   static int gender = 0;
+  static int age = 0;
+  static int weight = 0;
+  static int height = 0;
+  static List<String> health_record = [];
 
   const MyApp({super.key});
 
@@ -59,6 +64,7 @@ class MyApp extends StatelessWidget {
         '/vision' : (context) => const Vision(),
         '/ability' : (context) => const Ability(),
         '/listening' : (context) => const Listening(),
+        '/ask_question' : (context) => const AskQuestion(),
         '/health_record' : (content) => const HealthRecord(),
         '/gender' : (context) => const Gender(),
         '/age' : (context) => const Age(),

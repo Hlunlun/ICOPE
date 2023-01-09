@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icope/main.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:async';
+import '../utils/constants.dart';
 
 import 'package:icope/user/user_api.dart';
 
@@ -27,17 +27,19 @@ class UserDrawer extends StatelessWidget {
               Container (
                 height: 150,
                 decoration: BoxDecoration (
-                    color: Color(0xc192c7c7)
+                    color: moodColor
                 ),
                 child: Center(
-                  child:Text(MyApp.username, style: TextStyle(fontSize: 50),),
+                  child:Text(MyApp.username, style: TextStyle(fontSize: 50,color: Color(
+                      0xff5a5854)),),
                 )
               ),
               ListTile (
                 leading: Icon(Icons.folder,size: 35),
                 title: Text('健康紀錄', style: stringStyle,),
                 onTap: () {
-                  Navigator.pushNamed(context, '/health_record');
+                  // Navigator.pushNamed(context, '/health_record');
+                  Navigator.pushNamed(context, '/ask_question');
                 },
               ),
               ListTile (
@@ -68,7 +70,7 @@ class UserDrawer extends StatelessWidget {
 }
 
 const TextStyle stringStyle=TextStyle(
-    color: Color(0xFF404040),
+    color: Color(0xFF636262),
     fontFamily: 'Akaya',
     fontSize: 30,
     fontWeight: FontWeight.bold

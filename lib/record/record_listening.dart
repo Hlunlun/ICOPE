@@ -99,8 +99,7 @@ class listenRecordState extends State<listenRecord> {
         // 控制開始錄音或停止錄音
         await recorder.toggleRecording(path);
         // When stop recording, pass wave file to socket
-        if (!recorder.isRecording)
-            await Speech2Text().connect(path, setTxt, "MTK_ch");
+        if (!recorder.isRecording)await Speech2Text().connect(path, setTxt, "MTK_ch");
         // set state is recording or stop
         setState(() {
           recorder.isRecording;
@@ -113,7 +112,7 @@ class listenRecordState extends State<listenRecord> {
   void setTxt(taiTxt) {
     setState(() async {
       recognitionController.text = taiTxt;
-      recordOutput = recognitionController.text;
+      // recordOutput = recognitionController.text;
     });
   }
 

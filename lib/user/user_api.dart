@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:icope/user/user.dart';
 import 'package:icope/utils/environment.dart';
 
 
@@ -81,6 +82,32 @@ class UserApi {
             throw Exception('Failed to Save User.');
         }
     }
+
+    static Future<User> findUser(String id) async{
+        var client =http.Client();
+        var uri=Uri.parse("http://" + api + "/findUserAge");
+        final http.Response response = await client.post(
+            uri,
+            headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, String>{
+                'id': id,
+            }),
+        );
+        if(response.statusCode==200){
+            final json = jsonDecode(response.body);
+            if(json['success']){
+                return User(name: json['name'], id: id);
+            }else{
+                return User(name: json['name'], id: id);
+            }
+        }else {
+            throw Exception('Failed to Save User.');
+        }
+    }
+
+
 
 
 }

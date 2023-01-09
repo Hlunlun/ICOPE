@@ -38,7 +38,8 @@ class _Listening extends State<Listening> {
   }
 
   Widget buildlist(){
-    nutriRecordState.title = '361';
+    nutriRecordState.title = '三六九';
+
     return ListView(
 
       //Important :Remove any padding from the ListView

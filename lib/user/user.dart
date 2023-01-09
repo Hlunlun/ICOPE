@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class User {
 
-    final String name;
-    final int id;
-    var  pwd;
-    var weight;
-    var height;
-    var blood_pressure;
+    String name;
+    String id;
+    String  pwd = "";
+    int weight = 0;
+    int height = 0;
+    int blood_pressure = 0;
 
     User({
       required this.name,
@@ -21,5 +21,6 @@ class User {
         //TODO
 
     );
+
 
 }

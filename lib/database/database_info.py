@@ -20,6 +20,8 @@ def add_new_user(info):
         'name':info['name'],
         'password' : info['pwd'],
         'id' : info['id'],
+        'age' : '',
+        'gender' : '',
         'health_record' : [],
     }
     collection.insert_one(data)

@@ -1,3 +1,7 @@
+import 'package:icope/gender/gender_model.dart';
+import 'package:icope/health_record/basic_info_card.dart';
+import 'package:icope/main.dart';
+
 import '../utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -23,24 +27,29 @@ class _HealthRecord extends State<HealthRecord> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: fillColor,
-        body: Center(
-          child: ElevatedButton(
-            style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
-              backgroundColor: MaterialStateProperty.all(loginBtnColor),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              children: [
+                SizedBox(width: 20,),
+                Icon(Icons.person,size: 50,color: Color(0xff4e4a4b),),
+                SizedBox(width: 10,),
+                Text(MyApp.username,style: TextStyle(fontSize: 32,fontWeight: FontWeight.w600,color: Color(0xff4e4a4b),),)
+              ],
             ),
-            onPressed: () async{
-              Navigator.pushNamed(context, '/gender');
-            },
-            child: const Text('請回答以下問題',style: TextStyle(
-                fontWeight: FontWeight.w300,
-                color: Colors.white,
-                fontSize: 25
-            ),),
-          ),
-        )
+            Divider(
+                indent : 10,
+                endIndent : 10,
+            ),
+            SizedBox(width: 10,),
+            Center(
+              child: BasicInfoCard(),
+            )
+
+
+          ]
+        ),
     );
   }
 

@@ -19,28 +19,35 @@ class _Gender extends State<Gender> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: fillColor,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        body: ListView(
+          padding: const EdgeInsets.all(8),
           children: <Widget>[
             SizedBox(
-              height: 50,
+              height: 20,
             ),
             Center(
-              child:            Text('請點選你的性別', style: TextStyle(
-                  fontSize: 30, color: loginBtnColor,fontWeight: FontWeight.w900
+              child:  Text('請點選你的性別', style: TextStyle(
+                  fontSize: 40, color: loginBtnColor,fontWeight: FontWeight.w900
               ),),
             ),
-            Flexible(
-                child:ListView.builder(
-                  itemCount: GenderModel.genders.length,
-                  itemBuilder: (context, index) {
-                    return GenderCard(
-                      icon: GenderModel.genders[index],
-                    );
-                  },
+            GenderCard(),
+            SizedBox(height: 25,),
+            ElevatedButton(
+                style: ButtonStyle(
+                    fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                    backgroundColor: MaterialStateProperty.all(loginBtnColor),
                 ),
+                onPressed: (){
+                    Navigator.pushNamed(context, '/age');
+                },
+                child:const Text('確認',style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
+                    fontSize: 25
+                ),),
             )
+
           ],
 
         ),

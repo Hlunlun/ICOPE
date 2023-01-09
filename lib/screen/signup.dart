@@ -50,7 +50,7 @@ class _Signup extends State<Signup> {
                         children: <Widget>[
                           Positioned(
                             child: Image.asset('assets/icons/ability.png',height: 60,),
-                            top: 80,
+                            top: 100,
                             left: 60,
                           ),
                           Positioned(
@@ -61,7 +61,7 @@ class _Signup extends State<Signup> {
                           Positioned(
                             child: Image.asset('assets/icons/vision.png',height: 60,),
                             top: 40.0,
-                            right: 30,
+                            right: 70,
                           ),
                           Positioned(
                             child: Image.asset('assets/icons/listening.png',height: 60,),
@@ -70,13 +70,13 @@ class _Signup extends State<Signup> {
                           ),
                           Positioned(
                             child: Image.asset('assets/icons/cognitive.png',height: 60,),
-                            top: 10.0,
+                            top: 40,
                             left: 130.0,
                           ),
                           Positioned(
                             child: Image.asset('assets/icons/mood.png',height: 60,),
-                            top: 120.0,
-                            left: 130.0,
+                            top: 100.0,
+                            left: 150.0,
                           ),
                         ],
                       ),
