@@ -8,10 +8,13 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'socket_stt.dart';
 
 
-
+final String title = '';
 class nutriRecord extends StatefulWidget {
-  const nutriRecord({Key? key}) : super(key: key);
-
+  //const nutriRecord({Key? key}) : super(key: key);
+  nutriRecord({
+    Key? key,
+    required title,
+  }) : super(key: key);
 
   @override
   State<nutriRecord> createState() => nutriRecordState();
@@ -77,7 +80,7 @@ class nutriRecordState extends State<nutriRecord> {
       onPressed: () async {
         // 得到 TextField 中輸入的 value
         // 如果為空則 return
-        String strings = '第一個問題, 三個月中體重是否無意減少, 第二個問題, 是否食慾不振' ;
+        String strings = title;
         if (strings.isEmpty) return;
         // connect to text2speech socket
         await Text2Speech().connect(play, strings, recognitionLanguage.toLowerCase());
