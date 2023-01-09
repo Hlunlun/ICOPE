@@ -38,14 +38,15 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.folder,size: 35),
                 title: Text('健康紀錄', style: stringStyle,),
                 onTap: () {
-                  // Navigator.pushNamed(context, '/health_record');
-                  Navigator.pushNamed(context, '/ask_question');
+                  Navigator.pushNamed(context, '/health_record');
                 },
               ),
               ListTile (
                 leading: Icon(Icons.logout,size: 35,),
                 title: Text('登出', style: stringStyle,),
                 onTap: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushNamed(context, '/signin');
                 },
               ),
               ListTile (

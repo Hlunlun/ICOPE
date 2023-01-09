@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:icope/health_record/basic_info_model.dart';
+import 'package:icope/main.dart';
+import 'package:icope/user/user_api.dart';
 import 'package:icope/utils/drawer.dart';
 
 class DailyRecord extends StatefulWidget {
@@ -17,8 +20,9 @@ const TextStyle stringStyle=TextStyle(
 );
 
 class _DailyRecord extends State<DailyRecord> {
-  final TextEditingController emailController=TextEditingController();
-  final TextEditingController passwordController=TextEditingController();
+  final TextEditingController bloodPressureController=TextEditingController();
+  final TextEditingController weightController=TextEditingController();
+  final TextEditingController heightController=TextEditingController();
 
 
   @override
@@ -32,16 +36,6 @@ class _DailyRecord extends State<DailyRecord> {
             fontSize: 30,
           ),),
           backgroundColor: Colors.grey,
-          // actions: [
-          //   IconButton(
-          //     iconSize: 35,
-          //     color: Colors.white,
-          //     onPressed: () {
-          //       Navigator.pushNamed(context, '/favorite');
-          //     },
-          //     icon: const Icon(Icons.settings),
-          //   ),
-          // ],
         ),
         body: buildDailyForm(),
     );
@@ -64,7 +58,7 @@ class _DailyRecord extends State<DailyRecord> {
           title: TextField(
             cursorColor:Colors.black87,
             style: const TextStyle(color:  Colors.black87),
-            controller: emailController,
+            controller: bloodPressureController,
             decoration: const InputDecoration(
 
                 focusedBorder: OutlineInputBorder(
@@ -85,7 +79,7 @@ class _DailyRecord extends State<DailyRecord> {
           title: TextField(
             cursorColor:Colors.black87,
             style: const TextStyle(color:  Colors.black87),
-            controller: emailController,
+            controller: weightController,
             decoration: const InputDecoration(
 
                 focusedBorder: OutlineInputBorder(
@@ -106,7 +100,7 @@ class _DailyRecord extends State<DailyRecord> {
           title: TextField(
             cursorColor:Colors.black87,
             style: const TextStyle(color:  Colors.black87),
-            controller: emailController,
+            controller: heightController,
             decoration: const InputDecoration(
 
                 focusedBorder: OutlineInputBorder(
@@ -132,8 +126,23 @@ class _DailyRecord extends State<DailyRecord> {
                 backgroundColor: MaterialStateProperty.all(Colors.black54),
               ),
               onPressed: (){
-                ///page through
-                Navigator.pushNamed(context, '/main');
+                UserApi.updateDailyRecord(MyApp.userid, bloodPressureController.text, weightController.text, heightController.text).then((value){
+
+                  MyApp.height = int.parse(heightController.text);
+                  MyApp.weight = int.parse(weightController.text);
+
+                  BasicInfoModel.gender = MyApp.gender==0?'女':MyApp.gender==1?'男':'其他';
+                  BasicInfoModel.height = MyApp.height.toString();
+                  BasicInfoModel.weight = MyApp.weight.toString();
+                  BasicInfoModel.age = MyApp.age.toString();
+
+                  bloodPressureController.text="";
+                  weightController.text = "";
+                  heightController.text = "";
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushNamed(context, '/main');
+                });
+
               },
               child: const Text('提交',style: TextStyle(
                   fontWeight: FontWeight.w300,

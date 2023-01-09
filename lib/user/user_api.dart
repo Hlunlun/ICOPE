@@ -83,9 +83,9 @@ class UserApi {
         }
     }
 
-    static Future<User> findUser(String id) async{
+    static Future<Map> findUser(String id) async{
         var client =http.Client();
-        var uri=Uri.parse("http://" + api + "/findUserAge");
+        var uri=Uri.parse("http://" + api + "/find_user_info");
         final http.Response response = await client.post(
             uri,
             headers: <String, String>{
@@ -98,9 +98,63 @@ class UserApi {
         if(response.statusCode==200){
             final json = jsonDecode(response.body);
             if(json['success']){
-                return User(name: json['name'], id: id);
+                return json['user'];
             }else{
-                return User(name: json['name'], id: id);
+                return {'wrong' : 'true'};
+            }
+        }else {
+            throw Exception('Failed to Save User.');
+        }
+    }
+
+    static Future<bool> updateUserBasicInfo(String id,int gender,int age) async{
+        var client =http.Client();
+        var uri=Uri.parse("http://" + api + "/update_user_basic");
+        final http.Response response = await client.post(
+            uri,
+            headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, String>{
+                'id': id,
+                'gender':gender.toString(),
+                'age' : age.toString(),
+            }),
+        );
+        if(response.statusCode==200){
+            final json = jsonDecode(response.body);
+            if(json['success']){
+                print(json);
+                return true;
+            }else{
+                return false;
+            }
+        }else {
+            throw Exception('Failed to Save User.');
+        }
+    }
+
+    static Future<bool> updateDailyRecord(String id,String bloodPressure, String weight, String height) async{
+        var client =http.Client();
+        var uri=Uri.parse("http://" + api + "/update_daily_record");
+        final http.Response response = await client.post(
+            uri,
+            headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, String>{
+                'id': id,
+                'bloodPressure':bloodPressure,
+                'weight' :  weight,
+                'height' : height,
+            }),
+        );
+        if(response.statusCode==200){
+            final json = jsonDecode(response.body);
+            if(json['success']){
+                return true;
+            }else{
+                return false;
             }
         }else {
             throw Exception('Failed to Save User.');

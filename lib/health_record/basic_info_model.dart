@@ -5,10 +5,15 @@ import '../utils/constants.dart';
 
 class BasicInfoModel{
 
+  static String gender= '';
+  static String weight = '';
+  static String age = '';
+  static String height = '';
+
   static List<BasicInfo> infos = <BasicInfo>[
-      BasicInfo(leading: '性別 : ', title: MyApp.gender==0?'女':MyApp.gender==1?'男':'其他'),
-      BasicInfo(leading: '體重 : ', title: MyApp.weight.toString()),
-      BasicInfo(leading: '年齡 : ', title: MyApp.age.toString()),
-      BasicInfo(leading: '身高 : ', title: MyApp.height.toString()),
+      BasicInfo(leading: '性別 : ', title: gender),
+      BasicInfo(leading: '體重 : ', title: weight),
+      BasicInfo(leading: '年齡 : ', title: age),
+      BasicInfo(leading: '身高 : ', title: height),
   ];
 }

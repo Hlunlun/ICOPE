@@ -6,7 +6,7 @@ from jsonmerge import Merger
 import random
 import time
 
-from database_info import find_user_login,find_user_by_id,add_new_user
+from database_info import find_user_login,find_user_by_id,add_new_user,update_user_basic_info,update_daily_info
 
 
 app = Flask(__name__)
@@ -45,6 +45,57 @@ def add_user():
 
         return jsonify({'success' : True})
 
+
+@app.route('/find_user_info',methods=['POST'])
+def find_user_info():
+    if request.method == 'POST':
+        user_id = request.json['id']
+
+        user = find_user_by_id(user_id)
+
+        return jsonify({
+            'success' : user!=None,
+            'user' : {
+                'id' : user['id'],
+                'name' : user['name'],
+                'age' : user['age'],
+                'gender' : user['gender'],
+                'health_record' : user['health_record']
+            }
+        })
+
+
+
+@app.route('/update_user_basic',methods=['POST'])
+def update_user_basic():
+    if request.method == 'POST':
+        user_id = request.json['id']
+        user_gender = request.json['gender']
+        user_age = request.json['age']
+        update_user_basic_info({
+            'id':user_id,
+            'age' :int(user_age),
+            'gender' : int(user_gender)
+        })
+
+        return jsonify({'success':True})
+
+@app.route('/update_daily_record',methods=['POST'])
+def update_daily_record():
+    if request.method == 'POST':
+        user_id = request.json['id']
+        user_bloodPressure = request.json['bloodPressure']
+        user_weight = request.json['weight']
+        user_height = request.json['height']
+
+        update_daily_info({
+            'id': user_id,
+            'bloodPressure':int(user_bloodPressure),
+            'weight' :  int(user_weight),
+            'height' : int(user_height),            
+        })
+
+        return jsonify({'success':True})
 
 
 if __name__ == "__main__":       

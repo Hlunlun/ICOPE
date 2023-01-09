@@ -39,6 +39,7 @@ class _Cognitive extends State<Cognitive> {
 
 Widget buildlist() {
 
+
   nutriRecordState.title = '鉛筆, 手機, 電腦';
 
   return ListView(

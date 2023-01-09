@@ -124,12 +124,23 @@ class LoginForm extends StatelessWidget {
                   bool exist = await UserApi.checkUser(idController.text,pwdController.text );
                   if(exist){
                     MyApp.userid = idController.text;
-
-                    MyApp.username = await UserApi.findUserName(MyApp.userid);
                     idController.text = "";
                     pwdController.text = "";
 
-                    Navigator.pushNamed(context, '/main');
+                    UserApi.findUser(MyApp.userid).then((value){
+                      var user = value;
+                      print(user);
+                      MyApp.username = user['name'];
+                      if(user['age']=='' || user['gender'] == ''){
+                          Navigator.pushNamed(context, '/ask_question');
+                      }else{
+                          MyApp.gender = user['gender'];
+                          MyApp.age = user['age'];
+                          MyApp.health_record = user['health_record'];
+                          Navigator.pushNamed(context, '/main');
+                      }
+                    });
+
                   }else{
                       showDialog<String>(
                         context: context,

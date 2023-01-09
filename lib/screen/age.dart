@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+import 'package:icope/main.dart';
+import 'package:icope/user/user_api.dart';
 import 'package:icope/utils/constants.dart';
 
 
@@ -13,6 +15,8 @@ class Age extends StatefulWidget {
 }
 
 class _AgeState extends State<Age> {
+
+  int birthyear=0;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +33,7 @@ class _AgeState extends State<Age> {
                 lastDate: DateTime.now(),
                 onChange: (DateTime newDate, _) {
                   setState(() {
-                    var dob = newDate.toString();
-                    print(dob);
+                    birthyear = newDate.year;
                   });
                 },
 
@@ -54,8 +57,17 @@ class _AgeState extends State<Age> {
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
                   backgroundColor: MaterialStateProperty.all(loginBtnColor),
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/health_record');
+                onPressed: () async{
+                  MyApp.age = DateTime.now().year- birthyear;
+
+                  UserApi.updateUserBasicInfo(MyApp.userid,MyApp.gender, MyApp.age).then((value) {
+                      if(value){
+                          Navigator.of(context).popUntil((route) => route.isFirst);
+                          Navigator.pushNamed(context, '/main');
+                      }
+                  });
+
+
                 },
                 child: const Text('確認',style: TextStyle(
                     fontWeight: FontWeight.w300,

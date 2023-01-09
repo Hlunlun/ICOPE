@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icope/main.dart';
 import '../utils/constants.dart';
 import '../gender/gender_model.dart';
 //
@@ -58,6 +59,7 @@ class _GenderCardState extends State<GenderCard> {
     return  InkWell(
       onTap: () => setState(
             () {
+              MyApp.gender = index;
           _selected = index;
         },
       ),

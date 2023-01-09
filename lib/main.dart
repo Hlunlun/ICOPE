@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
   static int age = 0;
   static int weight = 0;
   static int height = 0;
-  static List<String> health_record = [];
+  static int bloodPressure = 0;
+  static var health_record;
 
   const MyApp({super.key});
 
