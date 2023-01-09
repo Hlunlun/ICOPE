@@ -65,7 +65,6 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Flexible(
-
             child:GridView.count(
               crossAxisCount: 2,
               crossAxisSpacing: 4.0,

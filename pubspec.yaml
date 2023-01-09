@@ -45,6 +45,8 @@ dependencies:
   flutter_tts: ^3.6.2
   flutter_dotenv: ^5.0.2
   sign_button: ^2.0.2
+  flutter_sms: ^2.3.3
+  telephony: ^0.2.0
 
 
 dev_dependencies:

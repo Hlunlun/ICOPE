@@ -6,7 +6,8 @@ from jsonmerge import Merger
 import random
 import time
 
-from database_info import find_user_login,find_user_by_id
+from database_info import find_user_login,find_user_by_id,add_new_user
+
 
 app = Flask(__name__)
 
@@ -29,16 +30,20 @@ def find_user_name():
         user = find_user_by_id(user_id)
         return  jsonify({'success' : user!=None ,'name' : user['name']})
 
-# @app.route('add_new_user',methods = ['POST'])
-# def add_new_user():
-#     if request.method == 'POST':
-#         user_id = request.json['id']
+@app.route('/add_new_user',methods = ['POST'])
+def add_user():
+    if request.method == 'POST':
+        user_id = request.json['id']
+        user_name = request.json['name']
+        user_pwd = request.json['pwd']
 
-#         user_name = request.json['name']
+        add_new_user({
+            'name' : user_name,
+            'id' : user_id,
+            'pwd' : user_pwd,
+        })
 
-#         user_disease = request.json['disease']
-
-#         return jsonify({'success' : True})
+        return jsonify({'success' : True})
 
 
 

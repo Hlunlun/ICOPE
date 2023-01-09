@@ -12,4 +12,7 @@ const visionColor = Color(0xFFC1DDDF);
 const moodColor = Color(0xFFEEC174);
 const listeningColor = Color(0xFF79C5CF);
 
-//icon
+//login
+const cursorColor = Color(0xFFD78F50);
+const fillColor = Color(0xFFF6D9C2);
+const loginBtnColor = Color(0xffe8ad4a);

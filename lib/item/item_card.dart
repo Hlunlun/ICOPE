@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ItemCard extends StatelessWidget {
-  ItemCard({
+  const ItemCard({
     Key? key,
     required this.title,
     required this.icon,
@@ -24,7 +24,6 @@ class ItemCard extends StatelessWidget {
         },
         child: Card(
           color: color,
-
           child: Center(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

@@ -18,7 +18,7 @@ class UserDrawer extends StatelessWidget {
     return Drawer(
         width: 250,
         child: Container(
-          color: const Color(0xFFC4C4C4),
+          color: Colors.white,
           child: ListView(
 
             //Important :Remove any padding from the ListView
@@ -27,7 +27,7 @@ class UserDrawer extends StatelessWidget {
               Container (
                 height: 150,
                 decoration: BoxDecoration (
-                    color: Color(0xff92C7C7)
+                    color: Color(0xc192c7c7)
                 ),
                 child: Center(
                   child:Text(MyApp.username, style: TextStyle(fontSize: 50),),
@@ -37,6 +37,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.folder,size: 35),
                 title: Text('健康紀錄', style: stringStyle,),
                 onTap: () {
+                  Navigator.pushNamed(context, '/health_record');
                 },
               ),
               ListTile (

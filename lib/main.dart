@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:icope/screen/gender.dart';
+import 'package:icope/screen/health_record.dart';
 import 'package:icope/screen/signup.dart';
 
 import 'screen/home_page.dart';
@@ -18,6 +20,7 @@ void main() {
 class MyApp extends StatelessWidget {
   static String username = "";
   static String userid = "";
+  static int gender = 0;
 
   const MyApp({super.key});
 
@@ -43,6 +46,8 @@ class MyApp extends StatelessWidget {
         '/vision' : (context) => const Vision(),
         '/ability' : (context) => const Ability(),
         '/listening' : (context) => const Listening(),
+        '/health_record' : (content) => const HealthRecord(),
+        '/gender' : (context) => const Gender(),
       },
     );
   }

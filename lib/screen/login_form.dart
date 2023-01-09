@@ -11,11 +11,6 @@ class LoginForm extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Color cursorColor = Color(0xFFD78F50);
-  Color fillColor = Color(0xFFF6D9C2);
-  Color loginBtnColor = Color(0xffe8ad4a);
-
-
   // listen to input text
   final TextEditingController idController=TextEditingController();
   final TextEditingController pwdController=TextEditingController();

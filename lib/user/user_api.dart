@@ -6,6 +6,7 @@ import 'package:icope/utils/environment.dart';
 
 String api = '192.168.209.109:30011';
 
+
 class UserApi {
     static Future<bool> checkUser( String id,String pwd) async{
         var client =http.Client();
@@ -49,6 +50,32 @@ class UserApi {
                 return json['name'];
             }else{
                 return "None";
+            }
+        }else {
+            throw Exception('Failed to Save User.');
+        }
+    }
+
+    static Future<bool> addNewUser(String name, String id, String pwd) async{
+        var client =http.Client();
+        var uri=Uri.parse("http://" + api + "/add_new_user");
+        final http.Response response = await client.post(
+            uri,
+            headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, String>{
+                'name' : name,
+                'id': id,
+                'pwd' : pwd,
+            }),
+        );
+        if(response.statusCode==200){
+            final json = jsonDecode(response.body);
+            if(json['success']){
+                return true;
+            }else{
+                return false;
             }
         }else {
             throw Exception('Failed to Save User.');

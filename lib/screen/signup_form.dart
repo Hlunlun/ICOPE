@@ -1,40 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:telephony/telephony.dart';
 import 'package:icope/main.dart';
 import 'package:icope/user/user_api.dart';
 import '../utils/constants.dart';
 import '../utils/alert_dialog.dart';
 
-class SignupForm extends StatelessWidget {
+// Create a Form widget.
+class SignupForm extends StatefulWidget {
+  const SignupForm({super.key});
 
-  SignupForm({
-    Key? key,
-  }) : super(key: key);
+  @override
+  SignupFormState createState() {
+    return SignupFormState();
+  }
+}
 
-  Color cursorColor = Color(0xFFD78F50);
-  Color fillColor = Color(0xFFF6D9C2);
-  Color loginBtnColor = Color(0xffe8ad4a);
+// Create a corresponding State class.
+// This class holds data related to the form.
+class SignupFormState extends State<SignupForm> {
+  // Create a global key that uniquely identifies the Form widget
+  // and allows validation of the form.
+  //
+  // Note: This is a GlobalKey<FormState>,
+  // not a GlobalKey<MyCustomFormState>.
+  final _formKey = GlobalKey<FormState>();
 
-
-  // listen to input text
+    // listen to input text
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController idController=TextEditingController();
   final TextEditingController pwdController=TextEditingController();
+  final TextEditingController pwdConfirmController = TextEditingController();
 
+  final Telephony telephony = Telephony.instance;
 
   @override
   Widget build(BuildContext context) {
+    // Build a Form widget using the _formKey created above.
     return Form(
+      key: _formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-
           Padding(
             padding: const EdgeInsets.all(defaultPadding),
             child: TextFormField(
-              controller: idController,
-              onChanged: (String text){
-                if(text==""){
-
+              controller: nameController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '請輸入姓名';
                 }
+                return null;
               },
               style: TextStyle(
                   fontSize: 30,
@@ -58,7 +73,7 @@ class SignupForm extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50.0),
                   borderSide: BorderSide(color: Colors.transparent), ),
-                hintText:"你的姓名",
+                hintText:"姓名",
                 hintStyle: TextStyle(fontSize: 20,),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(16),
@@ -71,10 +86,11 @@ class SignupForm extends StatelessWidget {
             padding: const EdgeInsets.all(defaultPadding),
             child: TextFormField(
               controller: idController,
-              onChanged: (String text){
-                if(text==""){
-
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '請輸入手機號碼';
                 }
+                return null;
               },
               style: TextStyle(
                   fontSize: 30,
@@ -98,7 +114,7 @@ class SignupForm extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50.0),
                   borderSide: BorderSide(color: Colors.transparent), ),
-                hintText:"你的手機",
+                hintText:"手機號碼",
                 hintStyle: TextStyle(fontSize: 20,),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(16),
@@ -112,6 +128,12 @@ class SignupForm extends StatelessWidget {
             padding: const EdgeInsets.all(defaultPadding),
             child: TextFormField(
               controller: pwdController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '請輸入密碼';
+                }
+                return null;
+              },
               style: TextStyle(
                   fontSize: 30,
                   height: 30/30
@@ -134,41 +156,7 @@ class SignupForm extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50.0),
                   borderSide: BorderSide(color: Colors.transparent), ),
-                hintText:"你的密碼",
-                hintStyle: TextStyle(fontSize: 20,),
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Icon(Icons.lock,color: Colors.white,size: 40,),
-                ),
-              ),
-            ),
-          ),Padding(
-            padding: const EdgeInsets.all(defaultPadding),
-            child: TextFormField(
-              controller: pwdController,
-              style: TextStyle(
-                  fontSize: 30,
-                  height: 30/30
-              ),
-              textInputAction: TextInputAction.done,
-              obscureText: true,
-              cursorColor: cursorColor,
-              cursorWidth: 3,
-              // cursorColor: kPrimaryColor,
-              onSaved: (email) {},
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: fillColor,
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50.0),
-                  borderSide: BorderSide(color: Colors.transparent), ),
-                hintText:"在確認一次你的密碼",
+                hintText:"密碼",
                 hintStyle: TextStyle(fontSize: 20,),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(16),
@@ -177,12 +165,49 @@ class SignupForm extends StatelessWidget {
               ),
             ),
           ),
-
-          const SizedBox(height: defaultPadding),
-
-
-          Hero(
-            tag: "login_btn",
+          Padding(
+            padding: const EdgeInsets.all(defaultPadding),
+            child: TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '請再次確認密碼';
+                }
+                return null;
+              },
+              controller: pwdConfirmController,
+              style: TextStyle(
+                  fontSize: 30,
+                  height: 30/30
+              ),
+              textInputAction: TextInputAction.done,
+              obscureText: true,
+              cursorColor: cursorColor,
+              cursorWidth: 3,
+              // cursorColor: kPrimaryColor,
+              onSaved: (email) {},
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: fillColor,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                  borderSide: BorderSide(color: Colors.transparent), ),
+                hintText:"再確認一次密碼",
+                hintStyle: TextStyle(fontSize: 20,),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Icon(Icons.lock,color: Colors.white,size: 40,),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(defaultPadding),
             child : TextButton(
               style: ButtonStyle(
                 fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
@@ -190,22 +215,13 @@ class SignupForm extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all(loginBtnColor),
               ),
               onPressed: () async{
-                if(idController.text == "" || pwdController.text == ""){
-                  String message = '請確認是否填寫正確手機號碼與密碼';
-                  String title = '請填寫完整資料';
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) =>ShowAlertDialog(title: title, message:message),
-                  );
-                }else{
-                  bool exist = await UserApi.checkUser(idController.text,pwdController.text );
-                  if(exist){
-                    MyApp.userid = idController.text;
-
-                    MyApp.username = await UserApi.findUserName(MyApp.userid);
+                if (_formKey.currentState!.validate()) {
+                  bool success = await UserApi.addNewUser(nameController.text, idController.text, pwdController.text);
+                  if(success){
+                    nameController.text = "";
                     idController.text = "";
                     pwdController.text = "";
-
+                    pwdConfirmController.text = "";
                     Navigator.pushNamed(context, '/signin');
                   }else{
                     showDialog<String>(
@@ -213,6 +229,15 @@ class SignupForm extends StatelessWidget {
                       builder: (BuildContext context) =>ShowAlertDialog(title: '登入資料錯誤',message:'此用戶不存在'),
                     );
                   }
+
+                }else{
+                  String message = '請確認是否填寫完全部資料';
+                  String title = '請填寫完整資料';
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) =>ShowAlertDialog(title: title, message:message),
+                  );
+
                 }
               },
               child: const Text('註冊',style: TextStyle(
@@ -222,10 +247,8 @@ class SignupForm extends StatelessWidget {
               ),),
             ),
           ),
-          const SizedBox(height: defaultPadding),
 
         ],
       ),
     );
-  }
-}
+  }}
