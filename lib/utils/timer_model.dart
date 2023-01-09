@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:icope/utils/constants.dart';
 
 class TimerModel extends StatefulWidget {
   @override
@@ -45,8 +46,11 @@ class _TimerModel extends State<TimerModel> {
                   children: <Widget>[
                     Text('$time01 秒', style: TextStyle(fontSize: 40)),
                     ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(abilityColor),
+                      ),
                       onPressed: () => time_button_event(),
-                      child: Text(time01_start?'停止計時':'開始計時'),
+                      child: Text(time01_start?'停止計時':'開始計時',style: TextStyle(color: Colors.white),),
                     )
                   ],
                 ),

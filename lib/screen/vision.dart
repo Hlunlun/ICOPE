@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:icope/utils/constants.dart';
 import 'package:icope/utils/drawer.dart';
 import '../record/nutri_player.dart';
-Color loginBtnColor = Color(0xff517ae0);
+
+
 class Vision extends StatefulWidget {
   const Vision({Key? key}) : super(key: key);
 
@@ -27,8 +29,9 @@ class _Vision extends State<Vision> {
           title: const Text('視力評估',style: TextStyle(
             color: Colors.white,
             fontSize: 30,
+            fontWeight: FontWeight.w900
           ),),
-          backgroundColor: Colors.lightBlueAccent,
+          backgroundColor: visionColor,
         ),
       body:buildList()
     );
@@ -43,10 +46,14 @@ class _Vision extends State<Vision> {
       padding: EdgeInsets.zero,
       children: <Widget>[
         SizedBox(height: 50,),
-        nutriRecord(),
-        Padding(
-            padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
-            child: Text('看遠近閱讀有無困難?',style: TextStyle(fontSize: 40),)
+        Row(
+          children: [
+            nutriRecord(),
+            Padding(
+                padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
+                child: Text('看遠近閱讀\n有無困難?',style: TextStyle(fontSize: 40),)
+            ),
+          ],
         ),
         SizedBox(height: 50,),
         Padding(
@@ -55,7 +62,7 @@ class _Vision extends State<Vision> {
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
               shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
-              backgroundColor: MaterialStateProperty.all(loginBtnColor),
+              backgroundColor: MaterialStateProperty.all(visionColor),
             ),
             onPressed: (){
               showDialog<String>(
@@ -83,7 +90,7 @@ class _Vision extends State<Vision> {
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
               shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
-              backgroundColor: MaterialStateProperty.all(loginBtnColor),
+              backgroundColor: MaterialStateProperty.all(visionColor),
             ),
             onPressed: (){
               showDialog<String>(

@@ -33,10 +33,10 @@ class _Ability extends State<Ability> {
         drawer: UserDrawer(),
         appBar: AppBar(
           title: const Text('行動能力評估',style: TextStyle(
-            color: Colors.black87,
+            color: Colors.white,
             fontSize: 30,
           ),),
-          backgroundColor: Color(0xFFFEE9F2),
+          backgroundColor: abilityColor,
         ),
         body:buildList()
     );
@@ -46,14 +46,19 @@ class _Ability extends State<Ability> {
     nutriRecordState.title = '請在12秒內雙手抱胸起立坐下15次';
 
     return ListView(
-
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
       children: [
         SizedBox(height: 50,),
-        nutriRecord(),
-        Padding(
-            padding: EdgeInsets.fromLTRB(30, 0, 30, 30),
-            child: Text('請在12秒內雙手抱胸起立坐下15次',style: TextStyle(fontSize: 40),)
+        Row(
+          children: [
+            nutriRecord(),
+            Padding(
+                padding: EdgeInsets.fromLTRB(30, 0, 30, 30),
+                child: Text('請在12秒內\n雙手抱胸起\n立坐下15次',style: TextStyle(fontSize: 40),)
+            ),
+          ],
         ),
+
         TimerModel(),
 
         Padding(
@@ -76,11 +81,10 @@ class _Ability extends State<Ability> {
               FilteringTextInputFormatter.digitsOnly
             ],
             textInputAction: TextInputAction.next,
-            // cursorColor: kPrimaryColor,
             onSaved: (email) {},
             decoration: InputDecoration(
               filled: true,
-              fillColor: fillColor,
+              fillColor: Color(0x66EF4021),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.transparent,
@@ -100,12 +104,12 @@ class _Ability extends State<Ability> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
           child: ElevatedButton(
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
               shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
-              backgroundColor: MaterialStateProperty.all(loginBtnColor),
+              backgroundColor: MaterialStateProperty.all(abilityColor),
             ),
             onPressed: (){
               if(int.parse(timesController.text) >= 15){

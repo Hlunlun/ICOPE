@@ -29,8 +29,9 @@ class _Listening extends State<Listening> {
           title: const Text('聽力評估',style: TextStyle(
             color: Colors.white,
             fontSize: 30,
+            fontWeight: FontWeight.w900
           ),),
-          backgroundColor: Colors.yellowAccent,
+          backgroundColor: listeningColor,
         ),
         body:buildlist(),
     );
@@ -46,15 +47,17 @@ class _Listening extends State<Listening> {
       padding: EdgeInsets.zero,
       children: <Widget>[
         SizedBox(height: 50,),
-        Padding(
-            padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
-            child: Text('請按播放鍵聆聽數字',style: TextStyle(fontSize: 40),)
+        Row(
+          children: [
+            Padding(
+                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Text('請按播放鍵\n聆聽數字',style: TextStyle(fontSize: 40),),
+            ),
+            nutriRecord(),
+          ],
         ),
-        SizedBox(height: 50,),
-        Padding(
-          padding: EdgeInsets.fromLTRB(200, 0, 20, 0),
-          child: nutriRecord(),
-        ),
+
+
         SizedBox(height: 50,),
 
         listenRecord(),
@@ -68,7 +71,7 @@ class _Listening extends State<Listening> {
               fixedSize: MaterialStateProperty.all(const Size(150, 65.0)),
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(60))),
-              backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+              backgroundColor: MaterialStateProperty.all(listeningColor),
             ),
             onPressed: () {
               final contains361 = listenRecordState.recordOutput.contains('3');

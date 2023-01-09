@@ -76,6 +76,7 @@ class nutriRecordState extends State<nutriRecord>{
       icon: const Icon(
         Icons.volume_down, // Flutter 內建的搜尋 icon
         color: Colors.grey, // 設定 icon 顏色
+        size: 50,
       ),
       // 當 icon 被點擊時執行的動作
       onPressed: () async {

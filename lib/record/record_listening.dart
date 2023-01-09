@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:icope/utils/constants.dart';
+
 import 'socket_tts.dart';
 import 'sound_player.dart';
 import 'sound_recorder.dart';
@@ -44,51 +46,39 @@ class listenRecordState extends State<listenRecord> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      Row(
-        children: [
-          const SizedBox(width: 10,),
-          buildRecord(),
-          const SizedBox(width: 10,),
-          buildOutputField(),
-        ],
-      ),
-    ],
-
+  Widget build(BuildContext context) => Center(
+    child: buildRecord(),
   );
 
 
   // build the button of recorder
   Widget buildRecord() {
     // whether is recording
-
     final isRecording = recorder.isRecording;
     // if recording => icon is Icons.stop
     // else => icon is Icons.mic
     final icon = isRecording ? Icons.stop : Icons.mic;
     // if recording => color of button is red
     // else => color of button is white
-    final primary = isRecording ? Colors.red : Color.fromRGBO(230,150, 157, 1);
+    final primary = isRecording ? Colors.red :Color(0x6879C5CF);
     // if recording => text in button is STOP
     // else => text in button is START
-    final text = isRecording ? 'STOP' : 'START';
+    final text = isRecording ? '停止' : '錄音';
     // if recording => text in button is white
     // else => color of button is black
-    final onPrimary = isRecording ? Colors.white : Colors.black;
-
+    final onPrimary = Colors.white ;
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
         // 設定 Icon 大小及屬性
-        minimumSize: const Size(10, 10),
+        minimumSize: const Size(260,60),
         primary: primary,
         onPrimary: onPrimary,
       ),
-      icon: Icon(icon),
+      icon: Icon(icon,size: 40,),
       label: Text(
         text,
         // 設定字體大小及字體粗細（bold粗體，normal正常體）
-        style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 30, ),
       ),
       // 當 Iicon 被點擊時執行的動作
       onPressed: () async {
