@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import '../record/flutter_tts.dart';
+import '../record/nutri_player.dart';
 import 'package:icope/utils/drawer.dart';
-import '../record/record.dart';
+
 
 //TODO : disabled -> once 3 months
+final TextEditingController nutriController=TextEditingController();
+final TextEditingController NOController=TextEditingController();
+Color cursorColor = Color(0xFF50D781);
+Color fillColor = Color(0xFFC2F6C5);
+Color loginBtnColor = Color(0xff4ae86c);
 
+Color cursorColor1 = Color(0xFF50D3D7);
+Color fillColor1 = Color(0xFFC2F6EA);
+Color loginBtn = Color(0xff4ae8c3);
 class Nutrition extends StatefulWidget {
   const Nutrition({Key? key}) : super(key: key);
 
@@ -44,13 +54,133 @@ class _Nutrition extends State<Nutrition> {
         ),
         body:Column(
           children: [
-            Record(),
             SizedBox(height: 50,),
+            nutriRecord(),
             Padding(
                 padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
               child: Text('三個月中體重是否無意減少?',style: TextStyle(fontSize: 40),)
-            )
+            ),
+            Hero(
+              tag: "login_btn",
+
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                  backgroundColor: MaterialStateProperty.all(loginBtnColor),
+                ),
+                onPressed: (){
+                    showDialog<String>(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          content:
+                          Text('異常, 請前往鄰近醫院進行進一步檢查!!!'),
+                        );
+                      },
+                    );
+                },
+                child: const Text('是',style: TextStyle(
+                    fontWeight: FontWeight.w100,
+                    color: Colors.white,
+                    fontSize: 25
+                ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            Hero(
+              tag: "login_btn",
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                  backgroundColor: MaterialStateProperty.all(loginBtnColor),
+                ),
+                onPressed: (){
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content:
+                        Text('無異常!繼續保持!!!'),
+                      );
+                    },
+                  );
+                },
+                child: const Text('否',style: TextStyle(
+                    fontWeight: FontWeight.w100,
+                    color: Colors.white,
+                    fontSize: 25
+                ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 50,),
+            Padding(
+                padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
+                child: Text('是否食慾不振?',style: TextStyle(fontSize: 40),)
+            ),
+            Hero(
+              tag: "login_btn",
+
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                  backgroundColor: MaterialStateProperty.all(loginBtn),
+                ),
+                onPressed: (){
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content:
+                        Text('異常, 請前往鄰近醫院進行進一步檢查!!!'),
+                      );
+                    },
+                  );
+                },
+                child: const Text('是',style: TextStyle(
+                    fontWeight: FontWeight.w100,
+                    color: Colors.white,
+                    fontSize: 25
+                ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            Hero(
+              tag: "login_btn",
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(150,65.0)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                  backgroundColor: MaterialStateProperty.all(loginBtn),
+                ),
+                onPressed: (){
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content:
+                        Text('無異常!繼續保持!!!'),
+                      );
+                    },
+                  );
+                },
+                child: const Text('否',style: TextStyle(
+                    fontWeight: FontWeight.w100,
+                    color: Colors.white,
+                    fontSize: 25
+                ),
+                ),
+              ),
+            ),
+
           ],
+
         )
     );
 
