@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+
 import 'package:icope/screen/age.dart';
 import 'package:icope/screen/gender.dart';
 import 'package:icope/screen/health_record.dart';
@@ -35,6 +39,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light().copyWith(primary: Colors.orange),
        useMaterial3: true
       ),
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [
+        // Locale('en', ''),
+        Locale('zh', ''),
+        // Locale('he', ''),
+        // Locale('es', ''),
+        // Locale('ru', ''),
+      ],
       initialRoute: '/signin',
       routes: {
         '/signin': (context)=>const Signin(),

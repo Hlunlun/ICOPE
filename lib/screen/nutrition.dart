@@ -57,6 +57,8 @@ class _Nutrition extends State<Nutrition> {
   }
 
   Widget buildList() {
+
+    nutriRecordState.title = '三個月中體重是否無意減少?';
     return ListView(
 
       //Important :Remove any padding from the ListView

@@ -48,6 +48,8 @@ dependencies:
   flutter_sms: ^2.3.3
   telephony: ^0.2.0
   flutter_holo_date_picker: ^1.1.0
+  calendar_date_picker2: ^0.3.6
+  flutter_localization: ^0.1.9
 
 
 dev_dependencies:
