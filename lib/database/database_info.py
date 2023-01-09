@@ -41,14 +41,11 @@ def find_user_by_id(user_id):
     user = collection.find_one({
         'id' : {'$eq' : user_id}
     })
-
     return user
-
-
 
 if __name__ == "__main__": 
    db = get_database()
-   add_user_info({
+   add_new_user({
     'name' : 'jj',
     'pwd':'jj',
     'id' : '0',

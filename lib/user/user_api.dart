@@ -3,12 +3,10 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:icope/utils/environment.dart';
 
-import 'package:icope/user/user.dart';
 
-String api = Environment.api;
+String api = '192.168.209.109:30011';
 
 class UserApi {
-
     static Future<bool> checkUser( String id,String pwd) async{
         var client =http.Client();
         var uri=Uri.parse("http://" + api + "/check_user");

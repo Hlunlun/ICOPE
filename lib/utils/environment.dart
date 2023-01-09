@@ -13,7 +13,7 @@ class Environment {
     );
 
     static const String api = String.fromEnvironment(
-      'API',
+      'API_HOST',
       defaultValue:'',
     );
 

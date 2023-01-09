@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         '/mood' : (context) => const Mood(),
         '/nutrition' : (context) => const Nutrition(),
         '/vision' : (context) => const Vision(),
-        '/action' : (context) => const Ability(),
+        '/ability' : (context) => const Ability(),
         '/listening' : (context) => const Listening(),
       },
     );
