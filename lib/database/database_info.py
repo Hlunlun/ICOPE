@@ -101,12 +101,15 @@ def update_health_record_info(info):
     exist = 0
 
     for i in range(len(health_record)):
-        if health_record[i].date == get_current_date():
-            health_record[i].cognitive = info['cognitive']
-            health_record[i].nutrition = info['nutrition']
-            health_record[i].vision = info['vision']
-            health_record[i].mood = info['mood']
-            health_record[i].listening = info['listening']
+        if health_record[i]['date'] == get_current_date():
+            health_record[i]['cognitive'] = info['cognitive']
+            health_record[i]['nutrition'] = info['nutrition']
+            health_record[i]['vision'] = info['vision']
+            health_record[i]['mood'] = info['mood']
+            health_record[i]['listening'] = info['listening']
+            health_record[i]['ability']['times'] = info['times']
+            health_record[i]['ability']['status'] = info['status']
+
             exist = 1
 
     if exist == 1 :
@@ -116,9 +119,22 @@ def update_health_record_info(info):
             {'$set':user}
         )
     else:
-        collection.insert_one({
-            
+        user['health_record'].append({
+            'date' : get_current_date(),
+            'cognitive': info['cognitive'],
+            'nutrition' : info['nutrition'],
+            'vision': info['vision'],
+            'mood': info['mood'],
+            'listening': info['listening'],
+            'ability' :{
+                'times' : info['times'],
+                'status' : info['status']
+            }
         })
+        collection.update_one(                
+            {'id': {'$eq' : info['id']}},
+            {'$set':user}
+        )
 
 
     

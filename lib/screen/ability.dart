@@ -1,3 +1,5 @@
+import 'package:icope/item/item_model.dart';
+import 'package:icope/user/user_api.dart';
 import 'package:icope/utils/drawer.dart';
 
 import '../utils/constants.dart';
@@ -112,23 +114,29 @@ class _Ability extends State<Ability> {
               backgroundColor: MaterialStateProperty.all(abilityColor),
             ),
             onPressed: (){
+              ItemModel.times = int.parse(timesController.text);
               if(int.parse(timesController.text) >= 15){
+
+                ItemModel.status = true;
+                UserApi.updateHealthRecord();
                 showDialog<String>(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      content: Text('很棒!繼續保持'),
+                      content: Text('很棒!繼續保持' ,style:TextStyle(fontSize: 30,color: Colors.black54)),
                     );
                   },
                 );
               }
               else{
+                ItemModel.status = false;
+                UserApi.updateHealthRecord();
                 showDialog<String>(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
                       content:
-                      Text('行動能力異常:\n世界衛生組織關於身體活動的全球建議\n1. 每周運動至少10分鐘\n2. 每周進行兩天或更多的肌力運動\n3. 若不能按照建議運動,那就盡可能地多運動'),
+                      Text('行動能力異常:\n世界衛生組織關於身體活動的全球建議\n1. 每周運動至少10分鐘\n2. 每周進行兩天或更多的肌力運動\n3. 若不能按照建議運動,那就盡可能地多運動',style:TextStyle(fontSize: 30,color: Colors.black54)),
                     );
                   },
                 );

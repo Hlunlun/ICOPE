@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:icope/item/item_model.dart';
+import 'package:icope/user/user_api.dart';
 import 'package:icope/utils/constants.dart';
 import 'package:icope/utils/drawer.dart';
 import '../record/flutter_tts.dart';
@@ -76,7 +78,7 @@ class _Nutrition extends State<Nutrition> {
                 builder: (context) {
                   return AlertDialog(
                     content:
-                    Text('異常, 請前往鄰近醫院進行進一步檢查!!!'),
+                    Text('異常, 請前往鄰近醫院進行進一步檢查!!!',style: TextStyle(fontSize: 30,color: Colors.black54)),
                   );
                 },
               );
@@ -99,15 +101,21 @@ class _Nutrition extends State<Nutrition> {
               backgroundColor: MaterialStateProperty.all(nutritionColor),
             ),
             onPressed: (){
-              showDialog<String>(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    content:
-                    Text('無異常!繼續保持!!!'),
+              ItemModel.nutrition = true;
+              UserApi.updateHealthRecord().then((value) {
+                if(value){
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content:
+                        Text('無異常!繼續保持!!!',style: TextStyle(fontSize: 30,color: Colors.black54)),
+                      );
+                    },
                   );
-                },
-              );
+                }
+              });
+
             },
             child: const Text('否',style: TextStyle(
                 fontWeight: FontWeight.w100,
@@ -132,15 +140,20 @@ class _Nutrition extends State<Nutrition> {
               backgroundColor: MaterialStateProperty.all(nutritionColor),
             ),
             onPressed: (){
-              showDialog<String>(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    content:
-                    Text('異常, 請前往鄰近醫院進行進一步檢查!!!'),
+              ItemModel.nutrition = false;
+              UserApi.updateHealthRecord().then((value) {
+                if(value){
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content:
+                        Text('異常, 請前往鄰近醫院進行進一步檢查!!!',style: TextStyle(fontSize: 30,color: Colors.black54)),
+                      );
+                    },
                   );
-                },
-              );
+                }
+              });
             },
             child: const Text('是',style: TextStyle(
                 fontWeight: FontWeight.w100,

@@ -1,3 +1,6 @@
+import 'package:icope/item/item_model.dart';
+import 'package:icope/user/user_api.dart';
+
 import '../utils/constants.dart';
 import 'package:flutter/material.dart';
 import '../record/record_listening.dart';
@@ -76,26 +79,39 @@ class _Listening extends State<Listening> {
             onPressed: () {
               final contains361 = listenRecordState.recordOutput.contains('3');
               if(contains361) {
-                showDialog<String>(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      content:
-                      Text('答對了! 聽力正常, 請繼續保持'),
+                ItemModel.listening = true;
+                UserApi.updateHealthRecord().then((value){
+                  if(value){
+                    showDialog<String>(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          content:
+                          Text('答對了! 聽力正常, 請繼續保持',style:TextStyle(fontSize: 30,color: Colors.black54)),
+                        );
+                      },
                     );
-                  },
-                );
+                  }
+                });
+
               }
               else{
-                showDialog<String>(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      content:
-                      Text('答錯了, 異常, 請前往鄰近醫院進行進一步檢查!!!'),
+                ItemModel.listening = false;
+
+                UserApi.updateHealthRecord().then((value){
+                  if(value){
+                    showDialog<String>(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          content:
+                          Text('答錯了, 異常, 請前往鄰近醫院進行進一步檢查!!!',style:TextStyle(fontSize: 30,color: Colors.black54)),
+                        );
+                      },
                     );
-                  },
-                );
+                  }
+                });
+
               }
             },
             child: const Text('送出語音', style: TextStyle(

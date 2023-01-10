@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icope/health_record/basic_info_model.dart';
 import 'package:icope/main.dart';
 import 'package:icope/user/user.dart';
 import 'package:icope/user/user_api.dart';
@@ -136,6 +137,11 @@ class LoginForm extends StatelessWidget {
                       }else{
                           MyApp.gender = user['gender'];
                           MyApp.age = user['age'];
+                          BasicInfoModel.gender = '女';//user['gender'].toString()=='0'?'女':user['gender'].toString()=='1'?'男':'其他';
+                          BasicInfoModel.age = user['age'].toString();
+                          BasicInfoModel.height = user['daily_record'][user['daily_record'].length-1]['height'].toString();
+                          BasicInfoModel.weight = user['daily_record'][user['daily_record'].length-1]['weight'].toString();
+
                           MyApp.health_record = user['health_record'];
                           Navigator.pushNamed(context, '/main');
                       }

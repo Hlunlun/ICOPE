@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icope/health_record/basic_info_model.dart';
+import 'package:icope/main.dart';
 import '../utils/constants.dart';
 import '../gender/gender_model.dart';
 
@@ -28,8 +29,8 @@ class BasicInfoCard extends StatelessWidget {
                 childAspectRatio: 3/1,
                 children: List.generate(BasicInfoModel.infos.length, (index) {
                   return ListTile(
-                    leading: Text(BasicInfoModel.infos[index].leading),
-                    title:Text(BasicInfoModel.infos[index].title),
+                    leading: Text(BasicInfoModel.infos[index].leading,style: TextStyle(color: Colors.black54),),
+                    title:Text(BasicInfoModel.infos[index].title,style: TextStyle(color: Colors.black54),),
                   );
                 })
             ),

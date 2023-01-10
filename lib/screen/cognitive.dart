@@ -1,3 +1,5 @@
+import 'package:icope/item/item_model.dart';
+import 'package:icope/user/user_api.dart';
 import 'package:icope/utils/drawer.dart';
 import '../utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -140,14 +142,18 @@ Widget buildlist() {
         ),
       ),
       SizedBox(height: 50,),
-      Padding(
-          padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
-          child: Text('請記住以下播放的三個單詞',style: TextStyle(fontSize: 40),)
-      ),
-      SizedBox(height: 50,),
-      Padding(
-        padding: EdgeInsets.fromLTRB(200, 0, 20, 0),
-        child: nutriRecord(),
+      Row(
+        children: [
+          Padding(
+              padding: EdgeInsets.fromLTRB(30, 0, 20, 0),
+              child: Text('請記住以下\n播放的三個\n單詞',style: TextStyle(fontSize: 40),)
+          ),
+          SizedBox(height: 50,),
+          Padding(
+            padding: EdgeInsets.all(0),
+            child: nutriRecord(),
+          ),
+        ],
       ),
       SizedBox(height: 50,),
 
@@ -162,30 +168,49 @@ Widget buildlist() {
                 borderRadius: BorderRadius.circular(60))),
             backgroundColor: MaterialStateProperty.all(cognitiveColor),
           ),
-          onPressed: () {
+          onPressed: () async{
             final contains361 = listenRecordState.recordOutput.contains('3');
             if(contains361) {
-              showDialog<String>(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    content:
-                    Text('答對了! 認知能力正常, 請繼續保持'),
+              ItemModel.cognitive = true;
+              await UserApi.updateHealthRecord().then((value){
+                if(value){
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content:
+                        Text('答對了! 認知能力正常, 請繼續保持',style:TextStyle(fontSize: 30,color: Colors.black54)),
+                      );
+                    },
                   );
-                },
-              );
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushNamed(context, '/main');
+                }
+              });
+
             }
             else{
-              showDialog<String>(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    content:
-                    Text('答錯了, 異常, 請前往鄰近醫院進行進一步檢查!!!'),
+              ItemModel.cognitive = false;
+              await UserApi.updateHealthRecord().then((value){
+                if(value){
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content:
+                        Text('答錯了, 異常, 請前往鄰近醫院進行進一步檢查!!!',style:TextStyle(fontSize: 30,color: Colors.black54)),
+                      );
+                    },
                   );
-                },
-              );
+
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushNamed(context, '/main');
+                }
+              });
+
             }
+
+
           },
           child: const Text('送出三個單詞', style: TextStyle(
               fontWeight: FontWeight.w100,

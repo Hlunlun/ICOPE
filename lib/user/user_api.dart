@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:icope/item/item.dart';
+import 'package:icope/item/item_model.dart';
+import 'package:icope/main.dart';
 import 'package:icope/user/user.dart';
 import 'package:icope/utils/environment.dart';
 
@@ -161,8 +164,36 @@ class UserApi {
         }
     }
 
-
-
+    static Future<bool> updateHealthRecord() async{
+        var client =http.Client();
+        var uri=Uri.parse("http://" + api + "/update_health_record");
+        final http.Response response = await client.post(
+            uri,
+            headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, String>{
+                'id': MyApp.userid,
+                'cognitive':ItemModel.cognitive.toString(),
+                'nutrition': ItemModel.nutrition.toString(),
+                'vision': ItemModel.vision.toString(),
+                'mood': ItemModel.mood.toString(),
+                'listening':ItemModel.listening.toString(),
+                'times': ItemModel.times.toString(),
+                'status': ItemModel.status.toString(),
+            }),
+        );
+        if(response.statusCode==200){
+            final json = jsonDecode(response.body);
+            if(json['success']){
+                return true;
+            }else{
+                return false;
+            }
+        }else {
+            throw Exception('Failed to Save User.');
+        }
+    }
 
 }
 

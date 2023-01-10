@@ -5,7 +5,7 @@ import '../utils/constants.dart';
 
 class BasicInfoModel{
 
-  static String gender= '';
+  static String gender= '0';
   static String weight = '';
   static String age = '';
   static String height = '';

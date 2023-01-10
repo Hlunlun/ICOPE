@@ -3,6 +3,7 @@ import 'package:icope/health_record/basic_info_card.dart';
 import 'package:icope/health_record/health_record_card.dart';
 import 'package:icope/health_record/health_record_model.dart';
 import 'package:icope/main.dart';
+import 'package:icope/screen/chart.dart';
 
 import '../health_record/basic_info_model.dart';
 
@@ -31,11 +32,16 @@ class _HealthRecord extends State<HealthRecord> {
 
   @override
   Widget build(BuildContext context) {
+    // return MyChart();
     return Scaffold(
+      // body:
         body: SingleChildScrollView(
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            MyChart(),
+
             SizedBox(height: 30,),
             Row(
               children: [
@@ -50,7 +56,59 @@ class _HealthRecord extends State<HealthRecord> {
                 endIndent : 10,
             ),
             SizedBox(width: 10,),
-            BasicInfoCard(),
+            // BasicInfoCard(),
+
+            Card(
+              child: Container(
+                width:300,
+                child: Row(
+                  children: [
+
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+
+                            SizedBox(width: 60,),
+                            Text('性別 : ',style: TextStyle(color: Colors.black54),),
+                            Text(BasicInfoModel.gender,style:TextStyle(color: Colors.black54),),
+                          ],
+                        ),
+                        SizedBox(height: 50,),
+                        Row(
+                          children: [
+
+                            SizedBox(width: 60,),
+                            Text('年齡 : ',style: TextStyle(color: Colors.black54),),
+                            Text(BasicInfoModel.age,style:TextStyle(color: Colors.black54),),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 60,),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text('體重 : ',style: TextStyle(color: Colors.black54),),
+                            Text(BasicInfoModel.weight,style:TextStyle(color: Colors.black54),),
+                          ],
+                        ),
+                        SizedBox(height: 50,),
+                        Row(
+                          children: [
+                            Text('身高 : ',style: TextStyle(color: Colors.black54),),
+                            Text(BasicInfoModel.height,style:TextStyle(color: Colors.black54),),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+
             Divider(
               indent : 10,
               endIndent : 10,
@@ -76,6 +134,108 @@ class _HealthRecord extends State<HealthRecord> {
                 ),),
               ],
             ),
+            Divider(
+              indent : 10,
+              endIndent : 10,
+            ),
+
+            TextButton(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                backgroundColor: MaterialStateProperty.all(cognitiveColor),
+              ),
+              onPressed: () async{
+
+              },
+              child: const Text('認知功能',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 25
+              ),),
+            ),
+            SizedBox(height: 10,),
+            TextButton(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                backgroundColor: MaterialStateProperty.all(abilityColor),
+              ),
+              onPressed: () async{
+
+              },
+              child: const Text('行動能力',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 25
+              ),),
+            ),
+            SizedBox(height: 10,),
+            TextButton(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                backgroundColor: MaterialStateProperty.all(nutritionColor),
+              ),
+              onPressed: () async{
+
+              },
+              child: const Text('營養不良',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 25
+              ),),
+            ),
+            SizedBox(height: 10,),
+            TextButton(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                backgroundColor: MaterialStateProperty.all(visionColor),
+              ),
+              onPressed: () async{
+
+              },
+              child: const Text('視力',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 25
+              ),),
+            ),
+            SizedBox(height: 10,),
+            TextButton(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                backgroundColor: MaterialStateProperty.all(moodColor),
+              ),
+              onPressed: () async{
+
+              },
+              child: const Text('情緒',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 25
+              ),),
+            ),
+            SizedBox(height: 10,),
+            TextButton(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all(const Size(330,65.0)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(60))),
+                backgroundColor: MaterialStateProperty.all(listeningColor),
+              ),
+              onPressed: () async{
+
+              },
+              child: const Text('聽力',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 25
+              ),),
+            ),
+            SizedBox(height: 10,),
+
 
 
 

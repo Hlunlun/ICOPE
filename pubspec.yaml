@@ -49,6 +49,7 @@ dependencies:
   telephony: ^0.2.0
   flutter_localization: ^0.1.9
   flutter_holo_date_picker: ^1.1.0
+  syncfusion_flutter_charts: ^20.4.42
 
 dev_dependencies:
   flutter_test:

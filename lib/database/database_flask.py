@@ -6,7 +6,7 @@ from jsonmerge import Merger
 import random
 import time
 
-from database_info import find_user_login,find_user_by_id,add_new_user,update_user_basic_info,update_daily_info
+from database_info import find_user_login,find_user_by_id,add_new_user,update_user_basic_info,update_daily_info,update_health_record_info
 
 
 app = Flask(__name__)
@@ -60,7 +60,8 @@ def find_user_info():
                 'name' : user['name'],
                 'age' : user['age'],
                 'gender' : user['gender'],
-                'health_record' : user['health_record']
+                'health_record' : user['health_record'],
+                'daily_record' : user['daily_record']
             }
         })
 
@@ -93,6 +94,24 @@ def update_daily_record():
             'bloodPressure':int(user_bloodPressure),
             'weight' :  int(user_weight),
             'height' : int(user_height),            
+        })
+
+        return jsonify({'success':True})
+
+
+@app.route('/update_health_record',methods=['POST'])
+def update_health_record():
+    if request.method == 'POST':
+        
+        update_health_record_info({
+            'id': request.json['id'],
+            'cognitive':request.json['cognitive'],
+            'nutrition': request.json['nutrition'],
+            'vision': request.json['vision'],
+            'mood': request.json['mood'],
+            'listening':request.json['listening'],
+            'times': request.json['times'],
+            'status': request.json['status'],       
         })
 
         return jsonify({'success':True})
