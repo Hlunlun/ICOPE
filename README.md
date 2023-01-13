@@ -64,6 +64,7 @@ before 2023/01/10
 - **Hearing capacities**
 ![](https://i.imgur.com/NpeFJJQ.png)
 - **Psychological capacity**
+![](https://i.imgur.com/LagNxwL.png)
 
 ## Reference
 #### Icope
