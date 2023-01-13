@@ -16,8 +16,11 @@ before 2023/01/10
 6. Test
 
 ## Table for contents
-- [General info](##General-info)
-- [Configuration](##Technologies)
+- [General info](#general-info)
+- [Configuration](#configuration)
+- [Technologies](#technologies)
+- [Result](#result)
+- [Reference](#reference)
 
 ## General info
 - Name : ICOPE 
